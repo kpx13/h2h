@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from ckeditor.fields import RichTextField
+from gallery.models import Category
 import pytils
 
 class Article(models.Model):
     title = models.CharField(max_length=128, verbose_name=u'заголовок')
-    content = RichTextField(verbose_name=u'вступительный текст')
+    image = models.ImageField(upload_to= 'uploads/ideas', max_length=256, verbose_name=u'фото')
+    content = models.TextField(verbose_name=u'вступительный текст')
     content_more = RichTextField(blank=True, verbose_name=u'текст в подробнее')
+    gallery = models.ForeignKey(Category, null=True, blank=True, verbose_name=u'галерея')
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
     date = models.DateField(auto_now_add=True, blank=True, verbose_name=u'дата написания')
     

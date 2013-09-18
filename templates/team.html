@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Команда{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/about/">О компании</a></li>
+    <li class="_active"><a href="#">Наша команда</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="page-team">
+        <h3>Мы организуем счастливые свадьбы</h3>
+
+        <div class="team__wrap">
+            {% for t in team %}
+                <div class="team__i">
+                    <div class="team__img">
+                        <img src="/media/{{ t.image }}" alt="">
+                    </div>
+                    <span class="team__name">{{ t.name }}</span>
+                    <span class="team__post">{{ t.position }}</span>
+
+                    <p>{{ t.text }}</p>
+
+                    <div class="team__quote__wrap">
+                        <span class="team__quote">
+                            {{ t.quote }}
+                        </span>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

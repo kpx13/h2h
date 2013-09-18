@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Новости{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="_active"><a href="/news/">Новости</a></li>
+{% endblock %}
+
+{% block content %}
+    <h4><span>Новости</span></h4>
+
+    <div class="page-ideas">
+        {% for i in news %}
+            <div class="preview">
+                <img src="/media/{{ i.image }}" alt="{{ i.title }}" />
+                <div class="preview__title"><span class="date">{{ i.date }}</span><a href="/news/{{ i.slug }}/">{{ i.title }}</a></div>
+                <p>{{ i.content }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="page-nav">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a class="active" href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+        </div>
+    </div>
+{% endblock %}

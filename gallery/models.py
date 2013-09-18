@@ -15,7 +15,7 @@ class Category(models.Model):
         return self.title
 
 class Photo(models.Model):
-    category = models.ForeignKey(Category, verbose_name=u'категория')
+    category = models.ForeignKey(Category, verbose_name=u'категория', related_name='photos')
     image = models.ImageField(upload_to= 'uploads/gallery', max_length=256, verbose_name=u'картинка')
     date = models.DateField(auto_now_add=True, blank=True, verbose_name=u'дата написания')
     
@@ -24,4 +24,4 @@ class Photo(models.Model):
         verbose_name_plural = u'фотографии'
     
     def __unicode__(self):
-        return self.id
+        return str(self.id)

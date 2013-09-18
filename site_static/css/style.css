@@ -819,11 +819,10 @@ a.preview__title:hover {
 
 .gallery__item {
     display: inline-block;
-    margin-right: 15px;
+    margin-right: 5px;
     margin-bottom: 10px;
     outline: none;
     border: none;
-    width: 150px;
 
 }
 
@@ -1375,3 +1374,4 @@ select::-ms-expand {
     display: none;
 }
 
+h3 a {text-decoration: inherit; color: inherit !important}

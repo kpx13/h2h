@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Свадебные идеи{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/about/">О компании</a></li>
+    <li class="_active"><a href="#">Свадебные идеи</a></li>
+{% endblock %}
+
+{% block content %}
+    <h4><a href="/about/">О компании</a> <span>Свадебные идеи</span></h4>
+
+    <div class="page-ideas">
+        {% for i in ideas %}
+            <div class="preview">
+                <img src="/media/{{ i.image }}" alt="{{ i.title }}" />
+                <a href="/about/ideas/{{ i.slug }}/" class="preview__title">{{ i.title }}</a>
+                <p>{{ i.content }}</p>
+            </div>
+        {% endfor %}
+
+        <div class="page-nav">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a class="active" href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% block title %}Свадебные идеи{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/about/">О компании</a></li>
+    <li><a href="/about/ideas/">Свадебные идеи</a></li>
+    <li class="_active"><a href="#">{{ idea.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <h4>{{ idea.title }}</h4>
+
+    <div class="page-idea">
+        <article>
+            {{ idea.content_more|safe }}
+        </article>
+        {% if idea.gallery %}
+            <section>
+                <h3>Фотоальбом: {{ idea.gallery.title }}</h3>
+                <div class="idea__gallery gallery">
+                    {% for p in idea.gallery.photos.all %}
+                        {% thumbnail p.image "x150" as im %}
+                            <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                                <img src="{{ im.url }}" />
+                            </a>
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+
+    </div>
+    
+{% endblock %}
