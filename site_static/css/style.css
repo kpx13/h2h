@@ -13,6 +13,7 @@ body {
     min-width: 1000px;
     margin: auto;
     overflow-x: hidden;
+    position: relative;
 }
 
 body p {
@@ -116,6 +117,7 @@ header .header-right nav ul li {
     border-left: 1px solid #dddddd;
     margin-left: 15px;
     font-weight: normal;
+    position: relative;
 }
 
 header .header-right nav ul li:first-child {
@@ -139,6 +141,31 @@ header .header-right nav ul li a:visited {
 header .header-right nav ul li a:hover {
     color: #3d96a0;
 }
+header .header-right nav ul li ul{
+    position: absolute;
+    border: 0;
+    left: 0;
+    z-index: 100;
+    background: #fff;
+    padding: 10px 0;
+    border: none;
+    display:none;
+
+}
+header .header-right nav ul li ul li{
+    border:none;
+    padding-left: 0;
+    float: none;
+    display: block;
+    white-space: nowrap;
+    margin: 0;
+    padding: 5px 10px;
+}
+header .header-right nav ul li ul li:first-child {
+    float: none;
+    padding: 5px 10px;
+}
+
 
 section.banner {
     width: 2000px;
@@ -446,6 +473,7 @@ footer .footer-contacts .social a+a+a {
 select{
     appearance: none;
     -moz-appearance: none;
+    padding-right: 20px;
 
 }
 
@@ -819,11 +847,11 @@ a.preview__title:hover {
 
 .gallery__item {
     display: inline-block;
-    margin-right: 5px;
+    margin-right: 15px;
     margin-bottom: 10px;
     outline: none;
     border: none;
-
+    margin: 5px;
 }
 
 .page-idea, .page-new {
@@ -941,12 +969,80 @@ background: url(../images/btn.jpg) no-repeat;
     right: 125px;
     bottom: 25px;
 }
+.review__btn._send{
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    display: block;
+    margin-top: 20px;
+
+}
+.review__popup textarea{
+    width: 100%;
+    height: 200px;
+    outline: none;
+    resize: none;
+    margin-top: 10px;
+}
 
 .review__btn:hover {
     color: #fff;
 }
 .review__btn:visited{
     color: #fff;
+}
+.review__popup__wrap{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 140;
+    height: 100%;
+    display: none;
+    background: rgba(0,0,0,.5);
+}
+.review__popup select{
+    width: auto;
+    max-width: 470px;
+    padding-right: 20px;
+
+}
+.review__popup .select{
+    float: left;
+    margin: 15px 0 10px 0;
+}
+.review__popup  label{
+    color: #71c8d2;
+    font-size: 14px;
+}
+.review__close{
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    color: #71c8d2;
+    font-size: 14px;
+    cursor: pointer;
+}
+.review__popup{
+    position: fixed;
+    width: 500px;
+    height: 400px;
+    z-index: 150;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #dddddd;
+    display: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 30px 10px 5px 10px;
+
 }
 
 .blog {
@@ -1373,5 +1469,7 @@ span.form-desc {
 select::-ms-expand {
     display: none;
 }
+.page-gallery select{
+    width: 150px;
+}
 
-h3 a {text-decoration: inherit; color: inherit !important}

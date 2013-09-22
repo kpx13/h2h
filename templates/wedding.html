@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Официальная церемония{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/wedding/">Ваша свадьба</a></li>
+    <li class="_active"><a href="/wedding/">Официальная церемония</a></li>
+{% endblock %}
+
+{% block content %}
+    <h4>Ваша свадьба <span>Официальная церемония</span></h4>
+
+    <div class="countries">
+        {% for c in countries %}
+            <div class="country">
+                <a href='/wedding/{{ c.slug }}/'>
+                    <img src="/media/{{ c.image }}" alt="{{ c.title }}"/>
+                    <div class="country__title">{{ c.title }}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

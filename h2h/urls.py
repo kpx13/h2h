@@ -29,6 +29,9 @@ urlpatterns = patterns('',
     url(r'^news/$', views.news),
     url(r'^contacts/$', views.contacts),
     url(r'^order/$', views.order),
+    url(r'^wedding/(?P<country>[\w-]+)/(?P<place>[\w-]+)/$', views.wedding_place),
+    url(r'^wedding/(?P<country>[\w-]+)/$', views.wedding_country),
+    url(r'^wedding/$', views.wedding),
     
     url(r'^(?P<page_name>[\w-]+)/$' , views.page),
 )

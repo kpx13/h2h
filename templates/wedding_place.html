@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% load thumbnail %}
+
+{% block title %}Официальная церемония | {{ country.title }} | {{ place.name }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/colorbox.css" />
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            $(".gallery").each(function(index, v){
+                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
+            });
+        });
+    </script>
+{% endblock %}
+    
+{% block breadcrumbs %}
+    <li><a href="/wedding/">Ваша свадьба</a></li>
+    <li><a href="/wedding/">Официальная церемония</a></li>
+    <li><a href="/wedding/{{ country.slug }}/">{{ country.title }}</a></li>
+    <li class="_active">{{ place.name }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="place_desc">
+        <h5>{{ place.name }}</h5>
+
+        <div class="place-map"><img src="/media/{{ place.image }}/" alt="{{ place.name }}" style='max-width: 300px'/>
+        </div>
+        {{ place.text|safe }}
+        
+    </div>
+    <div class="wedding-cost">
+        <div class="wedding-price">
+            {% if place.file_price %}
+                <a class="exel" href="/media/{{ place.file_price }}/">Прайс-лист</a>
+            {% endif %}
+            {% if place.file_service %}
+                <a class="word" href="/media/{{ place.file_service }}/">Дополнительные услуги</a>
+            {% endif %}
+            {% if place.file_promo %}
+                <a class="adobe" href="/media/{{ place.file_promo }}/">Рекламный буклет</a>
+            {% endif %}
+        </div>
+        <h3>{{ place.price }}</h3>
+
+        <p>{{ place.service }}</p>
+    </div>
+    <div class="wedding-place__gallery gallery">
+        {% for p in place.photos.all %}
+            {% thumbnail p.image "x150" as im %}
+                <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                    <img src="{{ im.url }}" />
+                </a>
+            {% endthumbnail %}
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Официальная церемония | {{ country.title }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/wedding/">Ваша свадьба</a></li>
+    <li><a href="/wedding/">Официальная церемония</a></li>
+    <li class="_active">{{ country.title }}</li>
+{% endblock %}
+
+{% block content %}
+    <div class="country_desc">
+        <h5>{{ country.title }}</h5>
+
+        <div class="counrty-map"><img src="/media/{{ country.map }}/"/>
+        </div>
+        {{ country.text|safe }}
+    </div>
+    <div class="wedding-places">
+        {% for p in country.places.all %}
+            <div class="preview">
+                <img src="/media/{{ p.image }}"/>
+                <div class="preview__title"><a href="/wedding/{{ country.slug }}/{{ p.slug }}/">{{ p.name }}</a></div>
+                {{ p.text|safe }}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

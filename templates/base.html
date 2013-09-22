@@ -10,27 +10,23 @@
 <head>
     <title>Heart 2 Heart | {% block title %} {% endblock %}</title>
     <meta charset="utf-8"/>
-    <link rel="stylesheet" href="/static/css/framework.css"/>
-    <link rel="stylesheet" href="/static/css/colorbox.css"/>
+    <link rel="stylesheet" href="/static/css/framework.css" />
     <!--[if lt IE 9]>
-    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/static/css/style.css"/>
+    <link rel="stylesheet" href="/static/css/style.css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.cycle.lite.js"></script>
-    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript" src="/static/js/script.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.slideshow').cycle({
-                fx: 'fade'
-            });
-            $(".gallery").each(function (index, v) {
-                $(this).find('.gallery__item').colorbox({rel: 'gallery' + index });
-            });
-
-
+    $(document).ready(function() {
+        $('.slideshow').cycle({
+            fx: 'fade'
         });
+    });
     </script>
+    {% block head %}
+    {% endblock %}
 
 </head>
 <body>
@@ -51,13 +47,26 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="/about/">О компании</a></li>
-                    <li><a href="#">Ваша свадьба</a></li>
+                    <li><a href="#">О компании</a>
+                        <ul>
+                            <li><a href="/about/philosophy/">Философия компании</a></li>
+                            <li><a href="/about/team/">Наша команда</a></li>
+                            <li><a href="/about/ideas/">Свадебные идеи</a></li>
+                            <li><a href="/news/">Новости</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Ваша свадьба</a>
+                        <ul>
+                            <li><a href="/wedding/">Официальная церемония</a></li>
+                            <li><a href="#">Свадебный атлас</a></li>
+                        </ul>
+                    </li>
                     <li><a href="#">Галерея</a></li>
                     <li><a href="#">Отзывы</a></li>
                     <li><a href="#">Блог</a></li>
                     <li><a href="#">Контакты</a></li>
                     <li><a href="#">Online-заявка</a></li>
+                
                 </ul>
             </nav>
         </div>

@@ -13,6 +13,7 @@ from feedback.forms import FeedbackForm
 from order.forms import OrderForm
 from order.models import Order
 from team.models import Team
+from wedding.models import Country, Place, PlacePhoto
 
 import config
 from livesettings import config_value
@@ -102,3 +103,19 @@ def order(request):
             return render_to_response('order.html', c, context_instance=RequestContext(request))
     else:
         raise Http404()
+    
+def wedding(request):
+    c = get_common_context(request)
+    c['countries'] = Country.objects.all()
+    return render_to_response('wedding.html', c, context_instance=RequestContext(request))
+
+def wedding_country(request, country):
+    c = get_common_context(request)
+    c['country'] = Country.get_by_slug(country)
+    return render_to_response('wedding_country.html', c, context_instance=RequestContext(request))
+
+def wedding_place(request, country, place):
+    c = get_common_context(request)
+    c['country'] = Country.get_by_slug(country)
+    c['place'] = Place.get_by_slug(place)
+    return render_to_response('wedding_place.html', c, context_instance=RequestContext(request))
