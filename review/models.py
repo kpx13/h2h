@@ -7,7 +7,6 @@ class Review(models.Model):
     name  = models.CharField(u'имена', max_length=255)
     place  = models.ForeignKey(Place, verbose_name=u'место')
     text = models.TextField(u'текст')
-    image = models.ImageField(upload_to= 'uploads/reviews', max_length=256, verbose_name=u'фото')
     request_date = models.DateTimeField(u'дата добавления', auto_now_add=True)
                     
     class Meta:

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}Галерея{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/colorbox.css" />
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            $(".gallery").each(function(index, v){
+                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="_active"><a href='#'>Галерея</a></li>
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-gallery">
+        <form method='get' id='filter'>
+            <div class="select">
+                <select size="1" name="country">
+                    <option value="">Все страны</option>
+                    {% for c in countries %}
+                        <option value="{{ c.id }}" {% if country == c.id %} selected {% endif %}>{{ c.title }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="select">
+                <select size="1" name="year">
+                    <option value="">Все года</option>
+                    {% for y in years %}
+                        <option value="{{ y }}" {% if year == y %} selected {% endif %}>{{ y }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </form>
+        <script>
+            $('#filter select').change(function(){
+                $('#filter').submit();
+            });
+        </script>
+        <h5>Галерея</h5>
+        {% for a in albums %}
+            <section>
+                <div class="gallery">
+                    <h3>{{ a.title }}</h3>
+                    {% for p in a.photos.all %}
+                        {% thumbnail p.image "x150" as im %}
+                            <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                                <img src="{{ im.url }}" />
+                            </a>
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+            </section>
+        {% endfor %}
+        
+
+
+        <div class="page-nav">
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a class="active" href="#">3</a>
+            <a href="#">4</a>
+            <a href="#">5</a>
+        </div>
+    </div>
+    
+{% endblock %}

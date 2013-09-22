@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}Отзывы{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="_active"><a href="#">Отзывы</a></li>
+{% endblock %}
+
+{% block content %}
+    <div class="page-review">
+        <h5>Отзывы</h5>
+        <div class="review__wrap">
+            {% for r in reviews %}
+                <div class="review" style='overflow: hidden; '>
+                    <img src="/media/{{ r.place.image }}" alt="" style='max-width: 300px'/>
+                    <div class="preview__title"><span class="review-name">{{ r.name }}</span><a href="/wedding/place/{{ r.place.slug }}">{{ r.place.name }}</a></div>
+                    <p>{{ r.text }}</p>
+                </div>
+            {% endfor %}
+            <a href="#" class="review__btn"> Оставить отзыв</a>
+            <div class="page-nav">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a class="active" href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+            </div>
+            <div style='clear: both'></div>
+         </div>
+         
+
+        <div class="review__popup">
+            <form method='POST'>
+                <label for="review__name">Имена пары: <input id="review__name" name="name" type="text" placeholder="например: Аня и Андрей"/></label>
+                <div class="select">
+                    <select size="1" name="place">
+                        <option value="1" selected>Название места проведения торжества</option>
+                        {% for p in places %}
+                            <option value="{{ p.id }}">{{ p.name }}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <textarea name="text" placeholder="Текст отзыва"></textarea>
+
+                <button type='submit' class='review__btn__send'>Оставить отзыв</button>
+                <span class="review__close">закрыть</span>
+                {% csrf_token %}
+            </form>
+        </div>
+        
+        
+        
+    </div>
+{% endblock %}

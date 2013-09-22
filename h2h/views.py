@@ -14,6 +14,8 @@ from order.forms import OrderForm
 from order.models import Order
 from team.models import Team
 from wedding.models import Country, Place, PlacePhoto
+from gallery.models import Category, Photo
+from review.models import Review
 
 import config
 from livesettings import config_value
@@ -119,3 +121,36 @@ def wedding_place(request, country, place):
     c['country'] = Country.get_by_slug(country)
     c['place'] = Place.get_by_slug(place)
     return render_to_response('wedding_place.html', c, context_instance=RequestContext(request))
+
+def gallery(request):
+    c = get_common_context(request)
+    albums = Category.objects.all()
+    years = []
+    for a in albums:
+        if a.year not in years:
+            years.append(a.year)
+    c['years'] = years
+    countries = []
+    for a in albums:
+        if a.country not in countries:
+            countries.append(a.country)
+    c['countries'] = countries
+    if request.GET.get('year', ''):
+        albums = albums.filter(year=request.GET['year'])
+        c['year'] = int(request.GET['year'])
+    if request.GET.get('country', ''):
+        albums = albums.filter(country=request.GET['country'])
+        c['country'] = int(request.GET['country'])
+    c['albums'] = albums 
+    return render_to_response('gallery.html', c, context_instance=RequestContext(request))
+
+def reviews(request):
+    c = get_common_context(request)
+    c['reviews'] = Review.objects.all()
+    c['places'] = Place.objects.all()
+    if request.method == 'POST':
+        Review(name=request.POST.get('name', ''), 
+               place=Place.objects.get(id=int(request.POST.get('place', '1'))),
+               text=request.POST.get('text', '')).save()
+        return HttpResponseRedirect('/reviews/')
+    return render_to_response('reviews.html', c, context_instance=RequestContext(request))
