@@ -19,13 +19,13 @@
                 </div>
             {% endfor %}
             <a href="#" class="review__btn"> Оставить отзыв</a>
-            <div class="page-nav">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a class="active" href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-            </div>
+            {% if need_pagination %}
+                <div class="page-nav">
+                    {% for p in page_range %}
+                        <a {% if p == reviews.number %} class='active' {% endif %} href="{{ get_request }}?page={{ p }}">{{ p }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div style='clear: both'></div>
          </div>
          

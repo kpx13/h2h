@@ -34,9 +34,8 @@ urlpatterns = patterns('',
     url(r'^wedding/$', views.wedding),
     url(r'^gallery/$', views.gallery),
     url(r'^reviews/$', views.reviews),
-    url(r'^blog/(?P<category>[\w-]+)/$', views.blog_category),
-    url(r'^blog/$', views.blog),
-    
-    
+    url(r'^blog/(?P<category>[\w-]+)/$', views.blog),
+    url(r'^blog/$', views.blog, {'category': None}),
+    url(r'^atlas/$', views.atlas),
     url(r'^(?P<page_name>[\w-]+)/$' , views.page),
 )

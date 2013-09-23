@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <li class="_active"><a href="#">Блог</a></li>
+    <li class="_active"><a href="/blog/">Блог</a></li>
 {% endblock %}
 
 {% block content %}
@@ -31,13 +31,14 @@
                 <h6>В данной категории нет статей.</h6>
             {% endfor %}
             
-            <div class="page-nav">
-                <a href="#">1</a>
-                <a href="#">2</a>
-                <a class="active" href="#">3</a>
-                <a href="#">4</a>
-                <a href="#">5</a>
-            </div>
+            
+            {% if need_pagination %}
+                <div class="page-nav">
+                    {% for p in page_range %}
+                        <a {% if p == blog.number %} class='active' {% endif %} href="{{ get_request }}?page={{ p }}">{{ p }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
             
         </div>
         
@@ -57,6 +58,8 @@
             </div>
 
         </div>
+        
+        
         
     </div>
 {% endblock %}

@@ -5,8 +5,9 @@
 {% block body %}
     <section class="banner">
         <div class="slideshow">
-            <a href="#"><img src="/static/images/banner_main.png" /></a>
-            <a href="#"><img src="/static/images/banner_main2.png" /></a>
+            {% for s in slideshow %}
+                <a href="#"><img src="/media/{{ s.image }}/" /></a>
+            {% endfor %}
         </div>
     </section>
     
@@ -32,9 +33,10 @@
             </div>
             <div class="ceremony-news">
                 <h3>Новости</h3>
-                <article><p><span>12.06.2013</span> <a href="#">Sed ut perspiciatis, unde</a> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et.</p></article>
-                <article><p><span>12.06.2013</span> <a href="#">Sed ut perspiciatis, unde</a> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et.</p></article>
-                <article><p><span>12.06.2013</span> <a href="#">Sed ut perspiciatis, unde</a> natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et.</p></article>
+                {% for n in news %}
+                    <article><p><span>{{ n.date }}</span> <a href="/news/{{ n.slug }}/">{{ n.title }}</a>{{ n.content }}</p></article>
+                {% endfor %}
+                
             </div>
         </section>
         <section class="philosophy-map">
@@ -46,7 +48,7 @@
                 <h3>Свадебный атлас</h3>
                 <h2>57 стран</h2>
                 <h2>285 городов</h2>
-                <a href="#">присоединяйся!</a>
+                <a href="/atlas/">присоединяйся!</a>
             </div>
         </section>
     </div>

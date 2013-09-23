@@ -12,4 +12,4 @@ class Slider(models.Model):
         
     
     def __unicode__(self):
-        return self.id
+        return str(self.id)

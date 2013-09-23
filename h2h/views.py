@@ -18,11 +18,14 @@ from gallery.models import Category, Photo
 from review.models import Review
 from blog.models import Article as Blog
 from blog.models import Category as BlogCategory
+from slideshow.models import Slider
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import config
 from livesettings import config_value
 from django.conf import settings
 
+PAGINATION_COUNT = 5
 
 def get_common_context(request):
     c = {}
@@ -45,11 +48,17 @@ def page(request, page_name):
 def home(request):
     c = get_common_context(request)
     c['request_url'] = 'home'
+    c['slideshow'] = Slider.objects.all()
+    c['news'] = News.objects.all()[:3]
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
 def about(request):
     c = get_common_context(request)
     return render_to_response('about.html', c, context_instance=RequestContext(request))
+
+def atlas(request):
+    c = get_common_context(request)
+    return render_to_response('atlas.html', c, context_instance=RequestContext(request))
 
 def philosophy(request):
     c = get_common_context(request)
@@ -97,17 +106,16 @@ def contacts(request):
 
 def order(request):
     c = get_common_context(request)
+    form = OrderForm()
     if request.method == 'POST':
         form = OrderForm(request.POST)
+        print request.POST
         if form.is_valid():
             ord = form.save()
-            ord.send_email()
-            return render_to_response('order_ok.html', c, context_instance=RequestContext(request))
-        else:
-            c['form'] = form 
-            return render_to_response('order.html', c, context_instance=RequestContext(request))
-    else:
-        raise Http404()
+            c['order_ok'] = True
+            form = OrderForm()
+    c['form'] = form 
+    return render_to_response('order.html', c, context_instance=RequestContext(request))
     
 def wedding(request):
     c = get_common_context(request)
@@ -149,25 +157,52 @@ def gallery(request):
 
 def reviews(request):
     c = get_common_context(request)
-    c['reviews'] = Review.objects.all()
+    items = Review.objects.all()
     c['places'] = Place.objects.all()
     if request.method == 'POST':
         Review(name=request.POST.get('name', ''), 
                place=Place.objects.get(id=int(request.POST.get('place', '1'))),
                text=request.POST.get('text', '')).save()
         return HttpResponseRedirect('/reviews/')
+    paginator = Paginator(items, PAGINATION_COUNT)
+    page = int(request.GET.get('page', '1'))
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        items = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        items = paginator.page(page)
+    c['page'] = page
+    c['page_range'] = paginator.page_range
+    if len(c['page_range']) > 1:
+        c['need_pagination'] = True
+    c['reviews'] = items
     return render_to_response('reviews.html', c, context_instance=RequestContext(request))
 
-def blog_category(request, category):
+def blog(request, category):
     c = get_common_context(request)
-    c['blog'] = Blog.objects.filter(category=category)
+    if not category:
+        items = Blog.objects.all()
+    else:
+        items = Blog.objects.filter(category=category)
     c['categories'] = BlogCategory.objects.all()
-    return render_to_response('blog.html', c, context_instance=RequestContext(request))
-
-def blog(request):
-    c = get_common_context(request)
-    c['blog'] = Blog.objects.all()
-    c['categories'] = BlogCategory.objects.all()
+    paginator = Paginator(items, PAGINATION_COUNT)
+    page = int(request.GET.get('page', '1'))
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        items = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        items = paginator.page(page)
+    c['page'] = page
+    c['page_range'] = paginator.page_range
+    if len(c['page_range']) > 1:
+        c['need_pagination'] = True
+    c['blog'] = items
     return render_to_response('blog.html', c, context_instance=RequestContext(request))
 
 

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявка{% endblock %}
+
+{% block head %}
+    
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="_active"><a href="#">Online-заявка</a></li>
+{% endblock %}
+
+{% block content %}
+    <h5>Online-заявка</h5>
+
+    <div class="services">
+        <span class="services__title">Дополнительные услуги:</span>
+        <ul>
+            <li><a href="#">Фотограф</a></li>
+            <li><a href="#">Оператор</a></li>
+            <li><a href="#">Цветочное оформление</a></li>
+            <li><a href="#">Стилист</a></li>
+            <li><a href="#">Букет / бутоньерка</a></li>
+            <li><a href="#">Транспорт для молодоженов</a></li>
+            <li><a href="#">Транспорт для гостей</a></li>
+            <li><a href="#">Торт</a></li>
+            <li><a href="#">Ужин</a></li>
+            <li><a href="#">Шоу-программа</a></li>
+        </ul>
+
+    </div>
+    <div class="application">
+        {% if order_ok %}
+            <h5>Спасибо! Ваше сообщение <span>отправлено</span>.</h5>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            <span class="required">Ваше имя</span>
+            <input required="required" type="text" name="field_1" {% if form.field_1.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_1.value %}{{ form.field_1.value }}{% endif %}'>
+            <span class="required">Дата свадьбы</span>
+            <input required="required" type="text" name="field_2" {% if form.field_2.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_2.value %}{{ form.field_2.value }}{% endif %}'>
+            <span class="required">Тип путешествия</span>
+            <input required="required" type="text" name="field_3" {% if form.field_3.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_3.value %}{{ form.field_3.value }}{% endif %}'>
+            <span>Страна</span>
+            <input type="text" name="field_4" {% if form.field_4.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_4.value %}{{ form.field_4.value }}{% endif %}'>
+            <span class="required">Количество гостей</span>
+            <input required="required" type="text" name="field_5" {% if form.field_5.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_5.value %}{{ form.field_5.value }}{% endif %}'>
+            <span class="required">Контактный телефон</span>
+            <input required="required" type="text" name="field_6" {% if form.field_6.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_6.value %}{{ form.field_6.value }}{% endif %}'>
+            <span class="required">Электронная почта</span>
+            <input required="required" type="text" name="field_7" {% if form.field_7.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_7.value %}{{ form.field_7.value }}{% endif %}'>
+            <span>Ваши комментарии</span>
+            <textarea name="field_8" {% if form.field_8.errors %} style='border: 1px solid red' {% endif %}>{% if form.field_8.value %}{{ form.field_8.value }}{% endif %}</textarea>
+            <span class="form-send"><input type="submit" value="Отправить" id="form-send"></span>
+        </form>
+        <span class="form-desc">Поля, <span>отмеченные красным </span> - обязательны для заполнения</span>
+    </div>
+{% endblock %}
