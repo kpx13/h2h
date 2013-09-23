@@ -10,7 +10,7 @@ class Article(models.Model):
     content = models.TextField(verbose_name=u'вступительный текст')
     content_more = RichTextField(blank=True, verbose_name=u'текст в подробнее')
     gallery = models.ForeignKey(Category, null=True, blank=True, verbose_name=u'галерея')
-    slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    slug = models.SlugField(max_length=128, verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
     date = models.DateField(auto_now_add=True, blank=True, verbose_name=u'дата написания')
     
     def save(self, *args, **kwargs):

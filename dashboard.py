@@ -43,9 +43,19 @@ class CustomIndexDashboard(Dashboard):
         
         self.children.append(
             modules.ModelList(
-                title = u'Страницы.',
+                title = u'Страницы',
                 models=(
                     'pages.models.Page',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Свадьбы',
+                models=(
+                    'wedding.models.Country',
+                    'wedding.models.Place',
                 ),
             )
         )
@@ -53,11 +63,10 @@ class CustomIndexDashboard(Dashboard):
         
         self.children.append(
             modules.ModelList(
-                title = u'Прайс',
+                title = u'Блог',
                 models=(
-                    'price.models.Category',
-                    'price.models.SubCategory',
-                    'price.models.Item',
+                    'blog.models.Category',
+                    'blog.models.Article',
                 ),
             )
         )
@@ -76,7 +85,63 @@ class CustomIndexDashboard(Dashboard):
             modules.ModelList(
                 title = u'Обратная связь',
                 models=(
-                    'feedback.models.Request',
+                    'feedback.models.Feedback',
+                ),
+            )
+        )
+        
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Галерея',
+                models=(
+                    'gallery.models.Category',
+                    'gallery.models.Photo',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Идеи',
+                models=(
+                    'ideas.models.Article',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Новости',
+                models=(
+                    'news.models.Article',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Отзывы',
+                models=(
+                    'review.models.Review',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Слайдшоу',
+                models=(
+                    'slideshow.models.Slider',
+                ),
+            )
+        )
+        
+        self.children.append(
+            modules.ModelList(
+                title = u'Команда',
+                models=(
+                    'team.models.Team',
                 ),
             )
         )
