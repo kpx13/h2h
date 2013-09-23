@@ -16,6 +16,8 @@ from team.models import Team
 from wedding.models import Country, Place, PlacePhoto
 from gallery.models import Category, Photo
 from review.models import Review
+from blog.models import Article as Blog
+from blog.models import Category as BlogCategory
 
 import config
 from livesettings import config_value
@@ -89,6 +91,7 @@ def contacts(request):
         if form.is_valid():
             form.save()
             form = FeedbackForm()
+            c['feedback_ok'] = True
         c.update({'form': form})
         return render_to_response('contacts.html', c, context_instance=RequestContext(request))
 
@@ -154,3 +157,18 @@ def reviews(request):
                text=request.POST.get('text', '')).save()
         return HttpResponseRedirect('/reviews/')
     return render_to_response('reviews.html', c, context_instance=RequestContext(request))
+
+def blog_category(request, category):
+    c = get_common_context(request)
+    c['blog'] = Blog.objects.filter(category=category)
+    c['categories'] = BlogCategory.objects.all()
+    return render_to_response('blog.html', c, context_instance=RequestContext(request))
+
+def blog(request):
+    c = get_common_context(request)
+    c['blog'] = Blog.objects.all()
+    c['categories'] = BlogCategory.objects.all()
+    return render_to_response('blog.html', c, context_instance=RequestContext(request))
+
+
+
