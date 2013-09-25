@@ -1473,6 +1473,7 @@ span.form-desc {
     position: absolute;
     top: 0;
     pointer-events:none;
+    z-index: 1
 }
 .ie10 .map-layout {
     background-image: none;

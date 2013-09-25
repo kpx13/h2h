@@ -41,6 +41,8 @@ class Place(models.Model):
     file_service = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'дополнительные услуги')
     file_promo = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'рекламный буклет')
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    coords_x = models.FloatField(verbose_name=u'Широта', blank=True, null=True)
+    coords_y = models.FloatField(verbose_name=u'Долгота', blank=True, null=True)
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -53,6 +55,14 @@ class Place(models.Model):
             return Place.objects.get(slug=page_name)
         except:
             return None
+        
+    @property
+    def coords(self):
+        return str(self.coords_x).replace(',', '.') + ', ' +str(self.coords_y).replace(',', '.')
+    
+    @property
+    def map_content(self):
+        return "<b>%s</b><br />%s<br />" % (self.name, self.country.title)
     
     class Meta:
         verbose_name = u'место'

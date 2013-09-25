@@ -38,4 +38,5 @@ urlpatterns = patterns('',
     url(r'^blog/$', views.blog, {'category': None}),
     url(r'^atlas/$', views.atlas),
     url(r'^(?P<page_name>[\w-]+)/$' , views.page),
+    url(r'^get_place/(?P<place_id>[\w-]+)/$', views.get_place),
 )

@@ -3,7 +3,55 @@
 {% block title %}Свадебный атлас{% endblock %}
 
 {% block head %}
+    <script src="http://api-maps.yandex.ru/2.0-stable/?load=package.standard&lang=ru-RU" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        ymaps.ready(init);
+        var myMap;
+
+        function init(){
+            
+            myMap = new ymaps.Map ("map", {
+                    center: [30,0],
+                    zoom: 3
+                    });
+
+            myMap.container.fitToViewport();
+            
+            {% for p in places %}
+                pm = new ymaps.Placemark(
+                    [{{ p.coords }}], 
+                    {
+    //                     iconContent: "{{ p.name }}",
+                        balloonContent: "Идёт загрузка..."
+                    },
+                    {                             
+                        iconImageHref: '/static/images/li2.png',
+                        iconImageSize: [16, 14],
+                        iconImageOffset: [0, 0]
+                        
+                    }
+                )
+                pm.events.add('click', function () {
+                    console.log(pm.balloon);
+                    $.ajax('/get_place/{{ p.id }}/').success(function(data){
+                            pm.properties.set({balloonContent:data});
+                        })
+//                     pm.balloon.s('/get_place/{{ p.id }}/');
+                });
+
+                myMap.geoObjects.add(pm);
+            {% endfor %}
+            
+            myMap.controls.add('zoomControl');
+            myMap.controls.add('scaleLine');
+            myMap.controls.add('mapTools');
+        
+        };
     
+    </script>
+
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -34,21 +82,20 @@
                 <option selected value="ceremony">Официальная церемония</option>
                 <option selected value="ceremony">Официальная церемония</option>
                 <option selected value="ceremony">Официальная церемония</option>
-
-
             </select>
         </div>
         <h5>Свадебный атлас</h5>
 
         <div class="mapp">  
-            <div class="map-layout"> </div>
-            <iframe width="1200" height="810" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+<!--              <div class="map-layout"> </div>  -->
+                <div id="map" style = 'width: 1200px; height: 810px; margin: 0'></div>
+         <!-- <iframe width="1200" height="810" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
                 src="https://maps.google.ru/maps?f=q&amp;source=s_q&amp;hl=ru&amp;geocode=&amp;q=%D0%B3.+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&amp;aq=&amp;sll=55.788729,37.537756&amp;sspn=0.354021,1.056747&amp;ie=UTF8&amp;hq=&amp;hnear=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+%D0%B3%D0%BE%D1%80%D0%BE%D0%B4+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&amp;t=m&amp;z=10&amp;ll=55.755826,37.6173&amp;output=embed">
-            </iframe>
+            </iframe>-->
         <br/>
-        <small>
+<!--        <small>
             <a href="https://maps.google.ru/maps?f=q&amp;source=embed&amp;hl=ru&amp;geocode=&amp;q=%D0%B3.+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&amp;aq=&amp;sll=55.788729,37.537756&amp;sspn=0.354021,1.056747&amp;ie=UTF8&amp;hq=&amp;hnear=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0,+%D0%B3%D0%BE%D1%80%D0%BE%D0%B4+%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&amp;t=m&amp;z=10&amp;ll=55.755826,37.6173" style="color:#0000FF;text-align:left"></a>
-        </small> 
+        </small> -->
     </div>
     </div>
 

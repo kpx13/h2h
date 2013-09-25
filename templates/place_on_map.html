@@ -1,0 +1,18 @@
+{% load thumbnail %}
+
+<div class='map_content' style=''>
+    <h3><a style='color: #e75775;' href='/wedding/{{ p.country.slug }}/{{ p.slug}}/ ' target='_blank'>{{ place.name }}</a></h3>
+    <p><a style='color: #71c8d2;' href='/wedding/{{ p.country.slug }}/ ' target='_blank'>{{ place.country.title }}</a></p>
+    <div style='clear: both'></div>
+    {{ place.text|safe }}
+    
+    <div class="wedding-place__gallery gallery" style='max-width: 450px'>
+        {% for p in place.photos.all %}
+            {% thumbnail p.image "x100" as im %}
+                <a class="gallery__item" target='_blank' href="/gallery?country={{ place.country.id }}" >
+                    <img src="{{ im.url }}" />
+                </a>
+            {% endthumbnail %}
+        {% endfor %}
+    </div>
+</div>

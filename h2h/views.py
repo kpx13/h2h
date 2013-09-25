@@ -56,8 +56,13 @@ def about(request):
     c = get_common_context(request)
     return render_to_response('about.html', c, context_instance=RequestContext(request))
 
+def get_place(request, place_id):
+    return render_to_response('place_on_map.html', {'place': Place.objects.get(id=int(place_id))})
+    
+
 def atlas(request):
     c = get_common_context(request)
+    c['places'] = Place.objects.all()
     return render_to_response('atlas.html', c, context_instance=RequestContext(request))
 
 def philosophy(request):
