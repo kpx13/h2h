@@ -914,7 +914,7 @@ background: url(../images/btn.jpg) no-repeat;
     box-sizing: border-box;
     margin-top: 10px;
     position: relative;
-
+    min-height: 750px;
 }
 
 .review {
@@ -1229,14 +1229,18 @@ h6 {
 }
 
 #contact-send {
-    color: #e75775;
+    height: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-align: center;
+    background: #e75775;
+    display: inline-block;
+    text-decoration: none;
     font-size: 24px;
     width: 164px;
     height: 30px;
-    border: 1px solid #b8bcde;
+    border: none;
     border-radius: 5px;
-    text-align: center;
-    line-height: 20px;
     box-shadow: none;
     padding: 0;
     float: right;
@@ -1261,7 +1265,7 @@ h6 {
 
 }
 
-.application input[type="text"] {
+.application input[type="text"], .application select {
     height: 30px;
     border-radius: 5px;
     box-shadow: none;

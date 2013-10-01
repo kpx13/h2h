@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 class Order(models.Model):
     field_1  = models.CharField(u'Ваше имя', max_length=255)
     field_2  = models.CharField(u'Дата свадьбы', max_length=255)
-    field_3  = models.CharField(u'Тип путешествия', max_length=255)
+    field_3  = models.CharField(u'Тип путешествия', blank=True, max_length=255)
     field_4  = models.CharField(u'Страна', blank=True, max_length=255)
     field_5  = models.CharField(u'Количество гостей', max_length=255)
     field_6  = models.CharField(u'Контактный телефон', max_length=255)

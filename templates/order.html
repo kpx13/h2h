@@ -39,10 +39,15 @@
             <input required="required" type="text" name="field_1" {% if form.field_1.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_1.value %}{{ form.field_1.value }}{% endif %}'>
             <span class="required">Дата свадьбы</span>
             <input required="required" type="text" name="field_2" {% if form.field_2.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_2.value %}{{ form.field_2.value }}{% endif %}'>
-            <span class="required">Тип путешествия</span>
-            <input required="required" type="text" name="field_3" {% if form.field_3.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_3.value %}{{ form.field_3.value }}{% endif %}'>
+            <span>Тип путешествия</span>
+            <input type="text" name="field_3" {% if form.field_3.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_3.value %}{{ form.field_3.value }}{% endif %}'>
             <span>Страна</span>
-            <input type="text" name="field_4" {% if form.field_4.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_4.value %}{{ form.field_4.value }}{% endif %}'>
+            <select  name="field_4" {% if form.field_4.errors %} style='border: 1px solid red' {% endif %} >
+                {% for c in countries %}
+                    <option value='{{ c.title }}'>{{ c.title }}</option>
+                {% endfor %}
+            </select>
+            
             <span class="required">Количество гостей</span>
             <input required="required" type="text" name="field_5" {% if form.field_5.errors %} style='border: 1px solid red' {% endif %} value='{% if form.field_5.value %}{{ form.field_5.value }}{% endif %}'>
             <span class="required">Контактный телефон</span>

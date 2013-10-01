@@ -62,7 +62,14 @@ def get_place(request, place_id):
 
 def atlas(request):
     c = get_common_context(request)
-    c['places'] = Place.objects.all()
+    if 'country' in request.GET:
+        c['places'] = Place.objects.filter(country=request.GET['country'])
+        c['country'] = int(request.GET['country'])
+        if len(c['places']) > 0:
+            c['country_coords'] = c['places'][0].coords
+    else:
+        c['places'] = Place.objects.all()
+    c['countries'] = Country.objects.all()
     return render_to_response('atlas.html', c, context_instance=RequestContext(request))
 
 def philosophy(request):
@@ -112,9 +119,9 @@ def contacts(request):
 def order(request):
     c = get_common_context(request)
     form = OrderForm()
+    c['countries'] = Country.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
-        print request.POST
         if form.is_valid():
             ord = form.save()
             c['order_ok'] = True

@@ -3,12 +3,17 @@ from django.db import models
 import pytils
 from ckeditor.fields import RichTextField
 
+WEDDING_TYPE = (('1', u'Официальная церемония'),
+                ('2', u'Символическая церемония'),
+                ('3', u'Венчание'))
+
 class Country(models.Model):
     title = models.CharField(max_length=128, verbose_name=u'название')
     image = models.ImageField(upload_to= 'uploads/wedding/country', max_length=256, verbose_name=u'фото')
     map = models.ImageField(upload_to= 'uploads/wedding/country', blank=True, max_length=256, verbose_name=u'карта')
     text = RichTextField(verbose_name=u'описание', blank=True)
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    #type = models.CharField(choices=WEDDING_TYPE, max_length=1, blank=True, default='1', verbose_name=u'тип')
     
     def save(self, *args, **kwargs):
         if not self.slug:
