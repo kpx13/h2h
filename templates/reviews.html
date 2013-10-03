@@ -14,7 +14,7 @@
             {% for r in reviews %}
                 <div class="review" style='overflow: hidden; '>
                     <img src="/media/{{ r.place.image }}" alt="" style='max-width: 300px'/>
-                    <div class="preview__title"><span class="review-name">{{ r.name }}</span><a href="/wedding/place/{{ r.place.slug }}">{{ r.place.name }}</a></div>
+                    <div class="preview__title"><span class="review-name">{{ r.name }}</span><a href="/wedding/type/{{ r.place.country.slug }}/{{ r.place.slug }}">{{ r.place.name }}</a></div>
                     <p>{{ r.text }}</p>
                 </div>
             {% endfor %}

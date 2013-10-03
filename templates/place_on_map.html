@@ -1,8 +1,8 @@
 {% load thumbnail %}
 
 <div class='map_content' style=''>
-    <h3><a style='color: #e75775;' href='/wedding/{{ p.country.slug }}/{{ p.slug}}/ ' target='_blank'>{{ place.name }}</a></h3>
-    <p><a style='color: #71c8d2;' href='/wedding/{{ p.country.slug }}/ ' target='_blank'>{{ place.country.title }}</a></p>
+    <h3><a style='color: #e75775;' href='/wedding/type/{{ place.country.slug }}/{{ place.slug}}/ ' target='_blank'>{{ place.name }}</a></h3>
+    <p><a style='color: #71c8d2;' href='/wedding/type/{{ place.country.slug }}/ ' target='_blank'>{{ place.country.title }}</a></p>
     <div style='clear: both'></div>
     {{ place.text|safe }}
     

@@ -142,21 +142,52 @@ def order(request):
             form = OrderForm()
     c['form'] = form 
     return render_to_response('order.html', c, context_instance=RequestContext(request))
-    
-def wedding(request):
+
+def get_event_type(type):
+    if type == 'official':
+        return (1, 'official', u'Официальная церемония')
+    elif type == 'symbolic':
+        return (2, 'symbolic', u'Символическая церемония') 
+    elif type == 'wedding':
+        return (3, 'wedding', u'Венчание')
+    else:
+        return 0
+
+def get_event_type_by_id(type):
+    if type == 1:
+        return (1, 'official', u'Официальная церемония')
+    elif type == 2:
+        return (2, 'symbolic', u'Символическая церемония') 
+    elif type == 3:
+        return (3, 'wedding', u'Венчание')
+    else:
+        return 0
+
+def wedding(request, type):
     c = get_common_context(request)
     c['countries'] = Country.objects.all()
+    c['event_type'] = get_event_type(type)
+    if not c['event_type']:
+        c['event_type'] = get_event_type('official')
     return render_to_response('wedding.html', c, context_instance=RequestContext(request))
 
-def wedding_country(request, country):
+def wedding_country(request, type, country):
     c = get_common_context(request)
     c['country'] = Country.get_by_slug(country)
+    c['event_type'] = get_event_type(type)
+    print c['event_type']
+    if not c['event_type']:
+        c['event_type'] = get_event_type('official')
+    c['places'] = Place.objects.filter(event_type=c['event_type'][0], country=c['country'])  
     return render_to_response('wedding_country.html', c, context_instance=RequestContext(request))
 
-def wedding_place(request, country, place):
+def wedding_place(request, type, country, place):
     c = get_common_context(request)
     c['country'] = Country.get_by_slug(country)
     c['place'] = Place.get_by_slug(place)
+    c['event_type'] = get_event_type(type)
+    if not c['event_type']:
+        c['event_type'] = get_event_type_by_id(c['place'].event_type.all()[0].id)
     return render_to_response('wedding_place.html', c, context_instance=RequestContext(request))
 
 def gallery(request):
