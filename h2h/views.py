@@ -13,7 +13,7 @@ from feedback.forms import FeedbackForm
 from order.forms import OrderForm
 from order.models import Order
 from team.models import Team
-from wedding.models import Country, Place, PlacePhoto
+from wedding.models import Country, Place, PlaceEventType, PlaceType, PlaceSeason
 from gallery.models import Category, Photo
 from review.models import Review
 from blog.models import Article as Blog
@@ -62,14 +62,28 @@ def get_place(request, place_id):
 
 def atlas(request):
     c = get_common_context(request)
-    if 'country' in request.GET:
-        c['places'] = Place.objects.filter(country=request.GET['country'])
-        c['country'] = int(request.GET['country'])
-        if len(c['places']) > 0:
-            c['country_coords'] = c['places'][0].coords
-    else:
-        c['places'] = Place.objects.all()
+    places = Place.objects.all()
+    c['country'] = int(request.GET.get('country', 0))
+    c['event_type'] = int(request.GET.get('event_type', 0))
+    c['place_type'] = int(request.GET.get('place_type', 0))
+    c['season'] = int(request.GET.get('season', 0))
+    
+    if c['country']:
+        places = places.filter(country=c['country'])
+        if len(places) > 0:
+            c['country_coords'] = places[0].coords
+    if c['event_type']:
+        places = places.filter(event_type=c['event_type'])
+    if c['place_type']:
+        places = places.filter(place_type=c['place_type'])
+    if c['season']:
+        places = places.filter(season=c['season'])
+    
     c['countries'] = Country.objects.all()
+    c['event_types'] = PlaceEventType.objects.all()
+    c['place_types'] = PlaceType.objects.all()
+    c['seasons'] = PlaceSeason.objects.all()
+    c['places'] = places
     return render_to_response('atlas.html', c, context_instance=RequestContext(request))
 
 def philosophy(request):
