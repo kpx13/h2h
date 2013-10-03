@@ -34,7 +34,38 @@ class Country(models.Model):
         
     def __unicode__(self):
         return self.title
-
+    
+    
+class PlaceEventType(models.Model):
+    name = models.CharField(max_length=140, verbose_name=u'название')
+    
+    class Meta:
+        verbose_name = u'тип события'
+        verbose_name_plural = u'типы событий'
+    
+    def __unicode__(self):
+        return self.name
+    
+class PlaceType(models.Model):
+    name = models.CharField(max_length=140, verbose_name=u'название')
+    
+    class Meta:
+        verbose_name = u'тип места'
+        verbose_name_plural = u'типы мест'
+    
+    def __unicode__(self):
+        return self.name
+    
+class PlaceSeason(models.Model):
+    name = models.CharField(max_length=30, verbose_name=u'название')
+    
+    class Meta:
+        verbose_name = u'сезон'
+        verbose_name_plural = u'сезоны'
+    
+    def __unicode__(self):
+        return self.name
+    
 class Place(models.Model):
     country = models.ForeignKey(Country, verbose_name=u'страна', related_name='places')
     name = models.CharField(max_length=200, verbose_name=u'название')
@@ -45,9 +76,16 @@ class Place(models.Model):
     file_price = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'прайс-лист')
     file_service = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'дополнительные услуги')
     file_promo = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'рекламный буклет')
-    slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    
+    event_type = models.ManyToManyField(PlaceEventType, blank=True, null=True)
+    place_type = models.ManyToManyField(PlaceType, blank=True, null=True)
+    season = models.ManyToManyField(PlaceSeason, blank=True, null=True)
+    
     coords_x = models.FloatField(verbose_name=u'Широта', blank=True, null=True)
     coords_y = models.FloatField(verbose_name=u'Долгота', blank=True, null=True)
+    
+    slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
+    
     
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -75,7 +113,6 @@ class Place(models.Model):
     
     def __unicode__(self):
         return self.name
-    
     
 class PlacePhoto(models.Model):
     place = models.ForeignKey(Place, verbose_name=u'категория', related_name='photos')

@@ -69,6 +69,7 @@
         <div class="select ">
             <form method='get' id='filter'>
                 <select size="1" name="country">
+                    <option value='0'>страна</option>
                     {% for c in countries %}
                         <option value='{{ c.id }}' {% if country == c.id %} selected='selected' {% endif %}>{{ c.title }}</option>
                     {% endfor %}
@@ -84,7 +85,7 @@
 
         <div class="mapp">  
 <!--               <div class="map-layout"> </div> -->
-                <div id="map" style = 'width: 1200px; height: 810px; margin: 0'></div>
+                <div id="map" style = 'width: 1000px; height: 810px; margin: 0'></div>
         <br/>
     </div>
     </div>

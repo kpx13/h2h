@@ -56,6 +56,9 @@ class CustomIndexDashboard(Dashboard):
                 models=(
                     'wedding.models.Country',
                     'wedding.models.Place',
+                    'wedding.models.PlaceEventType',
+                    'wedding.models.PlaceType',
+                    'wedding.models.PlaceSeason',
                 ),
             )
         )

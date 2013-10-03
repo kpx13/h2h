@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from models import Country, Place, PlacePhoto
+from models import Country, Place, PlacePhoto, PlaceEventType, PlaceSeason, PlaceType
 
 class PhotoInline(admin.TabularInline): 
     list_display = ('image', )
@@ -16,3 +16,6 @@ class CountryAdmin(admin.ModelAdmin):
 
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Place, PlaceAdmin)
+admin.site.register(PlaceEventType)
+admin.site.register(PlaceType)
+admin.site.register(PlaceSeason)
