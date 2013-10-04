@@ -68,15 +68,15 @@
     <div class="page-atlas">
         
         <form method='get' id='filter'>
-            <div class="select small">
+      <!--      <div class="select small">
                 <select size="1" name="country">
                     <option value='0'>страна</option>
                     {% for c in countries %}
                         <option value='{{ c.id }}' {% if country == c.id %} selected='selected' {% endif %}>{{ c.title }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="select small">
+            </div>-->
+            <div class="select">
                 <select size="1" name="event_type">
                     <option value='0'>тип события</option>
                     {% for c in event_types %}
@@ -84,7 +84,7 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="select small">
+            <div class="select">
                 <select size="1" name="place_type">
                     <option value='0'>место</option>
                     {% for c in place_types %}

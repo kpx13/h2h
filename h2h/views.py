@@ -165,10 +165,25 @@ def get_event_type_by_id(type):
 
 def wedding(request, type):
     c = get_common_context(request)
-    c['countries'] = Country.objects.all()
+    items = Country.objects.all()
     c['event_type'] = get_event_type(type)
     if not c['event_type']:
         c['event_type'] = get_event_type('official')
+    paginator = Paginator(items, 6)
+    page = int(request.GET.get('page', '1'))
+    try:
+        items = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        items = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        items = paginator.page(page)
+    c['page'] = page
+    c['page_range'] = paginator.page_range
+    if len(c['page_range']) > 1:
+        c['need_pagination'] = True
+    c['countries'] = items
     return render_to_response('wedding.html', c, context_instance=RequestContext(request))
 
 def wedding_country(request, type, country):

@@ -95,7 +95,7 @@ header .header-right .social a+a {
 }
 
 header .header-right .social a+a+a {
-    background: url(../images/twitter_icon.png) no-repeat;
+    background: url(../images/instagram_icon.png) no-repeat;
 }
 
 header .header-right nav {
@@ -530,6 +530,12 @@ h4 span>a, h4 span>a:hover, h4 span>a:visited   {
     position: relative;
     overflow: hidden;
     border-radius: 40px 0 40px 0;
+    -webkit-border-top-left-radius: 40px;
+    -webkit-border-bottom-right-radius: 40px;
+    -moz-border-radius-topleft: 40px;
+    -moz-border-radius-bottomright: 40px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
     margin-bottom: 30px;
     text-align: left;
     cursor: pointer;
