@@ -24,7 +24,7 @@
     {% if need_pagination %}
         <div class="page-nav">
             {% for p in page_range %}
-                <a {% if p == blog.number %} class='active' {% endif %} href="{{ get_request }}?page={{ p }}">{{ p }}</a>
+                <a {% if p == countries.number %} class='active' {% endif %} href="{{ get_request }}?page={{ p }}">{{ p }}</a>
             {% endfor %}
         </div>
     {% endif %}
