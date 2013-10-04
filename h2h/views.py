@@ -169,7 +169,7 @@ def wedding(request, type):
     c['event_type'] = get_event_type(type)
     if not c['event_type']:
         c['event_type'] = get_event_type('official')
-    paginator = Paginator(items, 6)
+    paginator = Paginator(items, 9)
     page = int(request.GET.get('page', '1'))
     try:
         items = paginator.page(page)
