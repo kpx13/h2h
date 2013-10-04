@@ -852,11 +852,12 @@ a.preview__title:hover {
 
 .gallery__item {
     display: inline-block;
-    margin-right: 15px;
+    margin: 5px;
     margin-bottom: 10px;
     outline: none;
     border: none;
-    width: 150px;
+    
+    
 
 }
 
