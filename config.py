@@ -18,3 +18,10 @@ config_register(StringValue(
         help_text = u"Почта, куда будут приходить заявки.",
         default = 'annkpx@gmail.com'
     ))
+
+config_register(StringValue(
+                            MYAPP_GROUP,
+        'BANNER_LINK', 
+        description = u'Ссылка с баннера',
+        default = '/'
+    ))

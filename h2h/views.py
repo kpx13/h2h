@@ -31,6 +31,7 @@ def get_common_context(request):
     c = {}
     c['request_url'] = request.path
     c['is_debug'] = settings.DEBUG
+    c['banner_link'] = config_value('MyApp', 'BANNER_LINK')
     c.update(csrf(request))
     return c
 
@@ -178,6 +179,7 @@ def wedding(request, type):
         items = Country.objects.filter(wt_2=True)
     if type == 'wedding':
         items = Country.objects.filter(wt_3=True)
+    items = items.order_by('title')
         
     paginator = Paginator(items, 9)
     page = int(request.GET.get('page', '1'))
@@ -200,7 +202,6 @@ def wedding_country(request, type, country):
     c = get_common_context(request)
     c['country'] = Country.get_by_slug(country)
     c['event_type'] = get_event_type(type)
-    print c['event_type']
     if not c['event_type']:
         c['event_type'] = get_event_type('official')
     c['places'] = Place.objects.filter(event_type=c['event_type'][0], country=c['country'])  
