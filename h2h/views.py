@@ -37,8 +37,7 @@ def get_common_context(request):
 def page(request, page_name):
     c = get_common_context(request)
     p = Page.get_by_slug(page_name)
-    if p.is_service or (page_name == 'cleaning_service'):
-        c.update({'services': Page.get_services_links()})
+    
     if p:
         c.update({'p': p})
         return render_to_response('page.html', c, context_instance=RequestContext(request))
@@ -49,7 +48,9 @@ def home(request):
     c = get_common_context(request)
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
+    c['philosophy'] = Page.get_by_slug('filosofiya-kompanii-na-glavnoj').content
     c['news'] = News.objects.all()[:3]
+    
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
 def about(request):
@@ -88,6 +89,9 @@ def atlas(request):
 
 def philosophy(request):
     c = get_common_context(request)
+    p = Page.get_by_slug('philosophy')
+    if p:
+        c.update({'p': p})
     return render_to_response('philosophy.html', c, context_instance=RequestContext(request))
 
 def ideas(request):
@@ -136,8 +140,8 @@ def order(request):
     c['countries'] = Country.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
-        if form.is_valid():
-            ord = form.save()
+        if form.is_valid():            
+            form.save()
             c['order_ok'] = True
             form = OrderForm()
     c['form'] = form 
@@ -165,10 +169,16 @@ def get_event_type_by_id(type):
 
 def wedding(request, type):
     c = get_common_context(request)
-    items = Country.objects.all()
     c['event_type'] = get_event_type(type)
     if not c['event_type']:
         c['event_type'] = get_event_type('official')
+    if type == 'official':
+        items = Country.objects.filter(wt_1=True)
+    if type == 'symbolic':
+        items = Country.objects.filter(wt_2=True)
+    if type == 'wedding':
+        items = Country.objects.filter(wt_3=True)
+        
     paginator = Paginator(items, 9)
     page = int(request.GET.get('page', '1'))
     try:

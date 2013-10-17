@@ -7,6 +7,16 @@ from django.conf import settings
 from django.core.mail import send_mail
 
 
+class OrderServices(models.Model):
+    name  = models.CharField(u'название', max_length=255)
+    
+    class Meta:
+        verbose_name = u'услуга'
+        verbose_name_plural = u'дополнительные услуги'
+    
+    def __unicode__(self):
+        return self.name
+
 class Order(models.Model):
     field_1  = models.CharField(u'Ваше имя', max_length=255)
     field_2  = models.CharField(u'Дата свадьбы', max_length=255)
@@ -16,6 +26,7 @@ class Order(models.Model):
     field_6  = models.CharField(u'Контактный телефон', max_length=255)
     field_7  = models.CharField(u'Электронная почта', blank=True, max_length=255)
     field_8 = models.TextField(blank=True, verbose_name=u'Ваши комментарии')
+    services = models.ManyToManyField(OrderServices, blank=True, verbose_name=u'Дополнительные услуги')
     date = models.DateTimeField(default=datetime.datetime.now, verbose_name=u'дата заказа')
     
     class Meta:
@@ -25,4 +36,4 @@ class Order(models.Model):
     
     def __unicode__(self):
         return str(self.date)
-    
+

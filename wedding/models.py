@@ -13,7 +13,10 @@ class Country(models.Model):
     map = models.ImageField(upload_to= 'uploads/wedding/country', blank=True, max_length=256, verbose_name=u'карта')
     text = RichTextField(verbose_name=u'описание', blank=True)
     slug = models.SlugField(verbose_name=u'слаг', unique=True, blank=True, help_text=u'Заполнять не нужно')
-    #type = models.CharField(choices=WEDDING_TYPE, max_length=1, blank=True, default='1', verbose_name=u'тип')
+    
+    wt_1 = models.BooleanField(blank=True, verbose_name=u'здесь проводятся официальные церемонии')
+    wt_2 = models.BooleanField(blank=True, verbose_name=u'здесь проводятся символические церемонии')
+    wt_3 = models.BooleanField(blank=True, verbose_name=u'здесь проводятся венчания')
     
     def save(self, *args, **kwargs):
         if not self.slug:

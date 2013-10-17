@@ -9,7 +9,6 @@
 }
 
 body {
-    overflow-x:hidden;
     position: relative;
 }
 
@@ -169,13 +168,14 @@ header .header-right nav ul li ul li:first-child {
 
 
 section.banner {
+    max-width: 2000px;
     height: 435px;
     min-height: 29px;
     -webkit-box-shadow: 0px 3px 4px rgba(50, 50, 50, 0.3);
     -moz-box-shadow: 0px 3px 4px rgba(50, 50, 50, 0.3);
     box-shadow: 0px 3px 4px rgba(50, 50, 50, 0.3);
     margin:  0 auto;
-    max-width: 2000px;
+    overflow: hidden;
 }
 
 section.banner .slideshow {
@@ -196,7 +196,7 @@ section.banner .slideshow {
 
 }
 .banner_img{
-      width: 1000px;
+    width: 1000px;
     display: block;
     margin: auto;
     position: absolute;
@@ -262,7 +262,6 @@ section.ceremony div.ceremony-wedding .preview {
 section.ceremony div .preview div {
     float: none;
     width: 227px;
-    height: 72px;
     background: url(../images/ceremony_anons_bg.png);
     -moz-border-radius: 0px 0px 5px 5px; /* Firefox */
     -webkit-border-radius: 0px 0px 5px 5px; /* Safari, Chrome */
@@ -270,7 +269,7 @@ section.ceremony div .preview div {
     border-radius: 0px 0px 5px 5px; /* CSS3 */
     margin: 0px;
     position: relative;
-    top: 178px;
+    top: 0px;
 }
 
 section.ceremony div .preview p.anons {
@@ -313,6 +312,7 @@ section.philosophy-map {
     margin: auto;
     padding-top: 30px;
     white-space: nowrap;
+    clear: both;
 
 }
 
@@ -453,7 +453,7 @@ footer .footer-contacts .social a+a {
 }
 
 footer .footer-contacts .social a+a+a {
-    background: url(../images/twitter_icon_f.png) no-repeat;
+    background: url(../images/instagram_icon_f.png) no-repeat;
 }
 
 .page-wrapper {
@@ -863,8 +863,8 @@ a.preview__title:hover {
     margin-bottom: 10px;
     outline: none;
     border: none;
-    
-    
+
+
 
 }
 
@@ -897,21 +897,21 @@ a.preview__title:hover {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-     padding: 0 0px 0 3px;
+     padding: 0 20px 0 3px;
     outline: none;
 }
 
 .select-btn {
     position: absolute;
     content: "";
-background: url(../images/btn.jpg) no-repeat;
+    background: url(../images/btn.jpg) no-repeat;
     width: 25px;
     height: 24px;
     right: 0px;
     top: 0px;
     cursor: pointer;
     pointer-events:none;
-     z-index: -1;
+    z-index: -1;
 
 }
 
@@ -1276,7 +1276,7 @@ h6 {
     margin-top: 20px;
 }
 
-.application form span {
+.application span {
     color: #71c8d2;
     font-size: 18px;
     display: block;
@@ -1387,7 +1387,7 @@ span.form-desc {
     left: -9999px;
 }
 
-.services li input[type="checkbox"] + label {
+.services li  label {
     background: url(../images/li.png) no-repeat right center;
     padding-right: 30px;
 }
@@ -1421,13 +1421,13 @@ span.form-desc {
     top: 20px;
 }
 
-     .page-phil__heading {
-         color: #e75775;
-         font-size: 35px;
-         border-top: 1px solid;
-         text-align: center;
-         margin: 70px 0 10px  0;
-     }
+.page-phil__heading {
+    color: #e75775;
+    font-size: 35px;
+    border-top: 1px solid;
+    text-align: center;
+    margin: 70px 0 10px  0;
+}
 .page-phil__heading span{
     position: relative;
     top: -35px;
@@ -1449,7 +1449,7 @@ span.form-desc {
 }
 .page-phil__list:nth-child(even) .page-phil__i:nth-child(even) {
     color: #71c8d2;
- padding: 0 50px 0 40px;
+    padding: 0 50px 0 40px;
 
 
 

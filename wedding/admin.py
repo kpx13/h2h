@@ -12,7 +12,7 @@ class PlaceAdmin(admin.ModelAdmin):
     list_display = ('name', 'country')
     
 class CountryAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('title', 'wt_1', 'wt_2', 'wt_3')
 
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Place, PlaceAdmin)

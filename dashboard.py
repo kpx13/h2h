@@ -80,6 +80,7 @@ class CustomIndexDashboard(Dashboard):
                 title = u'Заказы',
                 models=(
                     'order.models.Order',
+                    'order.models.OrderServices',
                 ),
             )
         )
