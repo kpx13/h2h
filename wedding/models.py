@@ -33,7 +33,7 @@ class Country(models.Model):
     class Meta:
         verbose_name = u'страна'
         verbose_name_plural = u'страны'
-        ordering=['id']
+        ordering=['title']
         
     def __unicode__(self):
         return self.title

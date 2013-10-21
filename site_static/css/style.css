@@ -269,7 +269,9 @@ section.ceremony div .preview div {
     border-radius: 0px 0px 5px 5px; /* CSS3 */
     margin: 0px;
     position: relative;
-    top: 0px;
+    top: 150px;
+    height: 100px;
+    overflow: hidden;
 }
 
 section.ceremony div .preview p.anons {
@@ -278,6 +280,7 @@ section.ceremony div .preview p.anons {
     color: #fff;
     padding: 12px 12px 6px 12px;
     margin: 0px;
+    top: 150px
 }
 
 section.ceremony .ceremony-news article {
