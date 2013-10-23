@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'news',
     'review',
     'slideshow',
+    'banner',
     'team',
     'wedding',
 )

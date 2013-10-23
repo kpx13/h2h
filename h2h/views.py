@@ -15,6 +15,7 @@ from order.models import Order
 from team.models import Team
 from wedding.models import Country, Place, PlaceEventType, PlaceType, PlaceSeason
 from gallery.models import Category, Photo
+from banner.models import Banner
 from review.models import Review
 from blog.models import Article as Blog
 from blog.models import Category as BlogCategory
@@ -31,7 +32,13 @@ def get_common_context(request):
     c = {}
     c['request_url'] = request.path
     c['is_debug'] = settings.DEBUG
-    c['banner_link'] = config_value('MyApp', 'BANNER_LINK')
+    ban = Banner.objects.all()
+    if len(ban) == 0:
+        c['banner_link'] = '/'
+        c['banner_img'] = ''
+    else:
+        c['banner_link'] = ban[0].name
+        c['banner_img'] = ban[0].image
     c.update(csrf(request))
     return c
 

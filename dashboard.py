@@ -137,6 +137,7 @@ class CustomIndexDashboard(Dashboard):
                 title = u'Слайдшоу',
                 models=(
                     'slideshow.models.Slider',
+                    'banner.models.Banner',
                 ),
             )
         )
