@@ -245,6 +245,7 @@ def reviews(request):
     if request.method == 'POST':
         Review(name=request.POST.get('name', ''), 
                place=Place.objects.get(id=int(request.POST.get('place', '1'))),
+               photo=request.FILES.get('photo', ''),
                text=request.POST.get('text', '')).save()
         return HttpResponseRedirect('/reviews/')
     paginator = Paginator(items, PAGINATION_COUNT)

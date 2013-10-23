@@ -13,7 +13,11 @@
         <div class="review__wrap">
             {% for r in reviews %}
                 <div class="review" style='overflow: hidden; '>
-                    <img src="/media/{{ r.place.image }}" alt="" style='max-width: 300px'/>
+                    {% if r.photo %}
+                        <img src="/media/{{ r.photo }}" alt="" style='max-width: 300px; max-height: 250px;'/>
+                    {% else %}
+                        <img src="/media/{{ r.place.image }}" alt="" style='max-width: 300px'/>
+                    {% endif %}
                     <div class="preview__title"><span class="review-name">{{ r.name }}</span><a href="/wedding/type/{{ r.place.country.slug }}/{{ r.place.slug }}">{{ r.place.name }}</a></div>
                     <p>{{ r.text }}</p>
                 </div>
@@ -31,8 +35,9 @@
          
 
         <div class="review__popup">
-            <form method='POST'>
+            <form method='POST' enctype="multipart/form-data">
                 <label for="review__name">Имена пары: <input id="review__name" name="name" type="text" placeholder="например: Аня и Андрей"/></label>
+                
                 <div class="select">
                     <select size="1" name="place">
                         <option value="1" selected>Название места проведения торжества</option>
@@ -43,7 +48,7 @@
                     </select>
                 </div>
                 <textarea name="text" placeholder="Текст отзыва"></textarea>
-
+                <label for="review__photo">Фотография: <input id="review__photo" name="photo" type="file" placeholder=""/></label>
                 <button type='submit' class='review__btn__send'>Оставить отзыв</button>
                 <span class="review__close">закрыть</span>
                 {% csrf_token %}
