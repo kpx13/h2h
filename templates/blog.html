@@ -24,7 +24,7 @@
             <h5>Блог</h5>
             {% for b in blog %}
                 <h6>{{ b.title }}</h6>
-                <img src="/media/{{ b.image }}/">
+                <img src="/media/{{ b.image }}">
                 {{ b.content|safe }}
                 <hr />
             {% empty %}
