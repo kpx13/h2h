@@ -2,7 +2,13 @@
 from django.contrib import admin
 import models
 
+class PhotoInline(admin.TabularInline): 
+    list_display = ('image', )
+    model = models.ArticlePhoto
+    extra = 5
+
 class ArticleAdmin(admin.ModelAdmin):
+    inlines = [ PhotoInline, ]
     list_display = ('title', )
     search_fields = ('title', 'content')
 

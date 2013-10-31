@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load thumbnail %}
+
 {% block title %}Блог{% endblock %}
 
 {% block head %}
@@ -8,6 +10,17 @@
     <script>
         $(function() {
             $( "#datepicker" ).datepicker();
+        });
+    </script>
+    
+    <link rel="stylesheet" href="/static/css/colorbox.css" />
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+    
+            $(".gallery").each(function(index, v){
+                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
+            });
         });
     </script>
 {% endblock %}
@@ -26,6 +39,17 @@
                 <h6>{{ b.title }}</h6>
                 <img src="/media/{{ b.image }}">
                 {{ b.content|safe }}
+                
+                <div class="wedding-place__gallery gallery">
+                    {% for p in b.photos.all %}
+                        {% thumbnail p.image "x150" as im %}
+                            <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                                <img src="{{ im.url }}" />
+                            </a>
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+                
                 <hr />
             {% empty %}
                 <h6>В данной категории нет статей.</h6>

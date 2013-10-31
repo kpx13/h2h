@@ -26,3 +26,14 @@ class Article(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+class ArticlePhoto(models.Model):
+    article = models.ForeignKey(Article, verbose_name=u'статья', related_name='photos')
+    image = models.ImageField(upload_to= 'uploads/blog', max_length=256, verbose_name=u'картинка')
+    
+    class Meta:
+        verbose_name = u'фотография'
+        verbose_name_plural = u'фотографии'
+    
+    def __unicode__(self):
+        return str(self.id)
