@@ -1325,8 +1325,9 @@ span.form-desc {
     margin-top: 5px;
 }
 
-.form-desc span {
+.form-desc strong {
     color: #e75775;
+    font-weight: normal;
 }
 
 #form-send {
