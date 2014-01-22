@@ -982,9 +982,6 @@ a.preview__title:hover {
     display: inline-block;
     text-decoration: none;
     margin-top: 7px;
-    position: absolute;
-    right: 125px;
-    bottom: 25px;
 }
 .review__btn._send{
     position: relative;
