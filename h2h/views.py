@@ -278,6 +278,7 @@ def blog(request, category):
         items = Blog.objects.all()
     else:
         items = Blog.objects.filter(category=category)
+        c['curr_cat'] = BlogCategory.objects.get(id=category)
     c['categories'] = BlogCategory.objects.all()
     paginator = Paginator(items, PAGINATION_COUNT)
     page = int(request.GET.get('page', '1'))

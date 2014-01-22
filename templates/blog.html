@@ -26,7 +26,13 @@
 {% endblock %}
 
 {% block breadcrumbs %}
-    <li class="_active"><a href="/blog/">Блог</a></li>
+    
+    {% if curr_cat %}
+        <li><a href="/blog/">Блог</a></li>
+        <li class="_active"><a href="/blog/{{ curr_cat.id }}/">{{ curr_cat.title }}</a></li>
+    {% else %}
+        <li class="_active"><a href="/blog/">Блог</a></li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -37,6 +43,7 @@
             <h5>Блог</h5>
             {% for b in blog %}
                 <h6>{{ b.title }}</h6>
+                 
                 <img src="/media/{{ b.image }}">
                 {{ b.content|safe }}
                 
@@ -49,6 +56,8 @@
                         {% endthumbnail %}
                     {% endfor %}
                 </div>
+                <p><i>  {{ b.date }} </i></p>
+                
                 
                 <hr />
             {% empty %}
@@ -76,7 +85,7 @@
 <!--                 <div class="blog__widget__title">Теги </div> -->
                 <ul>
                     {% for c in categories %}
-                        <li><a href="/blog/{{ c.id }}/">{{ c }}</a></li>
+                        <li><a href="/blog/{{ c.id }}/" {% if c == curr_cat %} style='color: #00abf0'{% endif %}>{{ c }}</a></li>
                     {% endfor %}
                 </ul>
             </div>

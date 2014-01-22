@@ -9,7 +9,7 @@ class PhotoInline(admin.TabularInline):
 
 class ArticleAdmin(admin.ModelAdmin):
     inlines = [ PhotoInline, ]
-    list_display = ('title', )
+    list_display = ('title', 'date')
     search_fields = ('title', 'content')
 
 admin.site.register(models.Category)
