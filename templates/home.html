@@ -34,7 +34,7 @@
             <div class="ceremony-news">
                 <h3>Новости</h3>
                 {% for n in news %}
-                    <article><p><span>{{ n.date }}</span> <a href="/blog/5/">{{ n.title }}</a>{{ n.content }}</p></article>
+                    <article><p><span>{{ n.date }}</span> <a href="/blog/{{ n.category.id }}/">{{ n.title }}</a> {{ n.content_short }}</p></article>
                 {% endfor %}
                 
             </div>

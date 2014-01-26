@@ -57,7 +57,7 @@ def home(request):
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
     c['philosophy'] = Page.get_by_slug('filosofiya-kompanii-na-glavnoj').content
-    c['news'] = News.objects.all()[:3]
+    c['news'] = Blog.objects.exclude(content_short="")[:3]
     
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 

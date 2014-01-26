@@ -17,6 +17,7 @@ class Article(models.Model):
     title = models.CharField(max_length=128, verbose_name=u'заголовок')
     category = models.ForeignKey(Category, verbose_name=u'категория')
     content = RichTextField(verbose_name=u'содержимое')
+    content_short = models.TextField(blank=True, verbose_name=u'вступительный текст')
     image = models.ImageField(upload_to= 'uploads/blog', max_length=256, verbose_name=u'картинка')
     date = models.DateField(auto_now_add=True, blank=True, verbose_name=u'дата написания')
     
