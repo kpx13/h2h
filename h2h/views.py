@@ -254,7 +254,7 @@ def reviews(request):
                place=Place.objects.get(id=int(request.POST.get('place', '1'))),
                photo=request.FILES.get('photo', ''),
                text=request.POST.get('text', '')).save()
-        return HttpResponseRedirect('/reviews/')
+        c['review_ok'] = True
     paginator = Paginator(items, PAGINATION_COUNT)
     page = int(request.GET.get('page', '1'))
     try:

@@ -11,6 +11,10 @@
     <div class="page-review">
         <h5>Отзывы</h5>
         <div class="review__wrap">
+            {% if review_ok %}
+                <h5>Спасибо за Ваш отзыв! В ближайшее время он появится на сайте!</h5>
+            {% endif %}
+            
             {% for r in reviews %}
                 <div class="review" style='overflow: hidden; '>
                     {% if r.photo %}
