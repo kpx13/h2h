@@ -3,6 +3,17 @@ from django.db import models
 from wedding.models import Place
 from pytils import dt, translit
 
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template import Context, Template
+from livesettings import config_value
+
+
+def sendmail(subject, body):
+    mail_subject = ''.join(subject)
+    send_mail(mail_subject, body, settings.DEFAULT_FROM_EMAIL,
+        [config_value('MyApp', 'EMAIL')])
+
 class Review(models.Model):
     name  = models.CharField(u'имена', max_length=255)
     place  = models.ForeignKey(Place, verbose_name=u'место')
@@ -19,3 +30,18 @@ class Review(models.Model):
 
     def __unicode__(self):
         return u'%s от %s' % (self.name, dt.ru_strftime(u"%d %B %Y", self.request_date))
+    
+    def save(self, *args, **kwargs):
+        super(Review, self).save(*args, **kwargs)
+        subject=u'Поступил новый отзыв',
+        body_templ="""
+            Имя: {{ r.name }}
+            Текст: {{ r.text }}
+            
+            Одобрить отзыв Вы можете здесь: http://h2h-wedding.com/admin/review/review/
+            """
+        ctx = Context({
+            'r': self
+        })
+        body = Template(body_templ).render(ctx)
+        sendmail(subject, body)
