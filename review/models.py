@@ -10,6 +10,7 @@ class Review(models.Model):
     photo = models.ImageField(upload_to=lambda instance, filename: 'uploads/reviews/' + translit.translify(filename), 
                               null=True, blank=True, max_length=256, verbose_name=u'фото')
     request_date = models.DateTimeField(u'дата добавления', auto_now_add=True)
+    approved = models.BooleanField(default=False, verbose_name=u'одобрено')
                     
     class Meta:
         verbose_name = u'отзыв'

@@ -247,7 +247,7 @@ def gallery(request):
 
 def reviews(request):
     c = get_common_context(request)
-    items = Review.objects.all()
+    items = Review.objects.filter(approved=True)
     c['places'] = Place.objects.all()
     if request.method == 'POST':
         Review(name=request.POST.get('name', ''), 
