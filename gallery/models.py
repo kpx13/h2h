@@ -9,10 +9,12 @@ class Category(models.Model):
     
     class Meta:
         verbose_name = u'категория'
-        verbose_name_plural = u'галлерея'
+        verbose_name_plural = u'галерея'
+        ordering = ['-year']
     
     def __unicode__(self):
         return self.title
+    
 
 class Photo(models.Model):
     category = models.ForeignKey(Category, verbose_name=u'категория', related_name='photos')

@@ -715,7 +715,7 @@ a.preview__title:hover {
 
 .team__i {
     float: left;
-    width: 210px;
+    width: 292px;
     text-align: center;
     font-size: 14px;
     vertical-align: top;
@@ -724,8 +724,7 @@ a.preview__title:hover {
 }
 
 .team__img {
-    width: 210px;
-    height: 166px;
+    width: 290px;
     border-radius: 20px 0 20px 0;
     overflow: hidden;
     margin-bottom: 10px;
@@ -754,7 +753,7 @@ a.preview__title:hover {
 
 .team__quote__wrap {
     background: #fafafa;
-    width: 204px;
+    width: 284px;
     padding: 15px 10px 10px 20px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -765,16 +764,18 @@ a.preview__title:hover {
     position: relative;
     border: 1px solid #dddddd;
     border-radius: 10px;
+    margin-top: 39px;
 }
 
-.team__quote__wrap:after {
+.team__quote__wrap_bef {
     content: '';
-    position: absolute;
+    position: absolute; 
+    margin-left: 30px;
     width: 29px;
     height: 29px;
+    z-index: 1099;
     background: url(../images/team_corner.png) no-repeat 0 0;
-    bottom: -29px;
-    right: 40px;
+    padding-bottom: 10px;
 
 }
 
