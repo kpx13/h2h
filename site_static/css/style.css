@@ -98,6 +98,14 @@ header .header-right .social a+a+a {
     background: url(../images/instagram_icon.png) no-repeat;
 }
 
+header .header-right .social a+a+a+a {
+    background: url(../images/tw.png) no-repeat;
+}
+
+header .header-right .social a+a+a+a+a {
+    background: url(../images/you.png) no-repeat;
+}
+
 header .header-right nav {
     float: right;
     width: 100%;
@@ -458,6 +466,15 @@ footer .footer-contacts .social a+a {
 footer .footer-contacts .social a+a+a {
     background: url(../images/instagram_icon_f.png) no-repeat;
 }
+
+footer .footer-contacts .social a+a+a+a {
+    background: url(../images/tw_f.png) no-repeat;
+}
+
+footer .footer-contacts .social a+a+a+a+a {
+    background: url(../images/you_f.png) no-repeat;
+}
+
 
 .page-wrapper {
     width: 1000px;
