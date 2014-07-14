@@ -10,6 +10,8 @@
 {% block content %}
     <h5>{{ event_type.2 }}</h5><br />
 
+    {{ event_type.3|safe }}
+
     <div class="countries">
         {% for c in countries %}
             <div class="country">

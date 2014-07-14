@@ -7,7 +7,7 @@ class Banner(models.Model):
     
     class Meta:
         verbose_name = 'баннер'
-        verbose_name_plural = 'баннер'
+        verbose_name_plural = 'баннеры'
         
     
     def __unicode__(self):

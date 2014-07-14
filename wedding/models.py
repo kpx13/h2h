@@ -41,6 +41,8 @@ class Country(models.Model):
     
 class PlaceEventType(models.Model):
     name = models.CharField(max_length=140, verbose_name=u'название')
+    text = RichTextField(verbose_name=u'описание события')
+    slug = models.CharField(max_length=45, verbose_name=u'URI')
     
     class Meta:
         verbose_name = u'тип события'

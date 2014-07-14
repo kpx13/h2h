@@ -2,7 +2,7 @@
 import os
 from os.path import abspath, join, dirname
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 
 ADMINS = (

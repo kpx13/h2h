@@ -156,23 +156,17 @@ def order(request):
     return render_to_response('order.html', c, context_instance=RequestContext(request))
 
 def get_event_type(type):
-    if type == 'official':
-        return (1, 'official', u'Официальная церемония')
-    elif type == 'symbolic':
-        return (2, 'symbolic', u'Символическая церемония') 
-    elif type == 'wedding':
-        return (3, 'wedding', u'Венчание')
-    else:
+    try:
+        result = PlaceEventType.objects.get(slug=type)
+        return(result.id, type, result.name, result.text)
+    except:
         return 0
 
 def get_event_type_by_id(type):
-    if type == 1:
-        return (1, 'official', u'Официальная церемония')
-    elif type == 2:
-        return (2, 'symbolic', u'Символическая церемония') 
-    elif type == 3:
-        return (3, 'wedding', u'Венчание')
-    else:
+    try:
+        result = PlaceEventType.objects.get(id=type)
+        return(result.id, type, result.name, result.text)
+    except:
         return 0
 
 def wedding(request, type):
@@ -295,6 +289,11 @@ def blog(request, category):
     if len(c['page_range']) > 1:
         c['need_pagination'] = True
     c['blog'] = items
+
+    # show vertical banner
+    v_banner = Banner.objects.get(id=2)
+    c['v_banner_src'] = '/media/' + str(v_banner.image)
+    c['v_banner_link'] = v_banner.name
     return render_to_response('blog.html', c, context_instance=RequestContext(request))
 
 
