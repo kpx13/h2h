@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'banner',
     'team',
     'wedding',
+    'instagallery',
 )
 
 

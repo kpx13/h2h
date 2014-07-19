@@ -16,6 +16,7 @@
         <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" href="/static/css/style.css" />
+    <script type="text/javascript" src="/static/js/slidr.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
     <script type="text/javascript" src="/static/js/jquery.cycle.lite.js"></script>
     <script type="text/javascript" src="/static/js/script.js"></script>
@@ -24,6 +25,9 @@
         $('.slideshow').cycle({
             fx: 'fade'
         });
+        var s = slidr.create('slidr-div', {transition: 'fade', controls: 'none', overflow: 'true'});
+        add_slides(s);
+        s.auto(5000);
     });
     </script>
     {% block head %}
@@ -71,7 +75,7 @@
                     <li><a href="/blog/">Блог</a></li>
                     <li><a href="/contacts/">Контакты</a></li>
                     <li><a href="/order/">Online-заявка</a></li>
-                
+
                 </ul>
             </nav>
         </div>
@@ -90,10 +94,10 @@
                 <li class="_active"><a href="#">Блог</a></li>
             {% endblock %}
         </ul>
-            
+
         {% block content %}
         {% endblock %}
-        
+
     </div>
 {% endblock %}
 

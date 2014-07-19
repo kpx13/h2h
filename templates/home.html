@@ -10,7 +10,7 @@
             {% endfor %}
         </div>
     </section>
-    
+
     <div class="ceremony-wrapper">
         <section class="ceremony">
             <div class="ceremony-official">
@@ -31,12 +31,18 @@
                     <div><p class="anons">Брак, заключенный на небесах — это особая степень родства и узы, которые невозможно разорвать.</p></div>
                 </a>
             </div>
-            <div class="ceremony-news">
-                <h3>Новости</h3>
-                {% for n in news %}
-                    <article><p><span>{{ n.date }}</span> <a href="/blog/{{ n.category.id }}/">{{ n.title }}</a> {{ n.content_short }}</p></article>
+            <div id="slidr-div" class="ceremony-news">
+                <h3><img height="42px" src="/static/images/instagram.png"></h3>
+                {% for g in instagallery %}
+                <div data-slidr="{{ g.media_id }}">
+                    <a href="{{ g.link }}" class="preview" style="background:url(/media/{{ g.image_low }}) no-repeat;width:270px;height:250px;margin-top:0px;border-radius:6px" target="_blank">
+                        <div style="width:270px">
+                            <p class="anons"><font style="font-size:small">{{ g.text }}</font></p>
+                        </div>
+                    </a>
+                </div>
                 {% endfor %}
-                
+
             </div>
         </section>
         <section class="philosophy-map">
@@ -52,4 +58,15 @@
             </div>
         </section>
     </div>
+
+<script>
+function add_slides(s) {
+    s.add('h', [
+    {% for g in instagallery  %}
+        '{{ g.media_id }}',
+    {% endfor %}
+    '{{ instagallery.0.media_id }}'
+    ]);
+};
+</script>
 {% endblock %}

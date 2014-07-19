@@ -20,6 +20,7 @@ from review.models import Review
 from blog.models import Article as Blog
 from blog.models import Category as BlogCategory
 from slideshow.models import Slider
+from instagallery.models import Instagallery
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 import config
@@ -57,8 +58,7 @@ def home(request):
     c['request_url'] = 'home'
     c['slideshow'] = Slider.objects.all()
     c['philosophy'] = Page.get_by_slug('filosofiya-kompanii-na-glavnoj').content
-    c['news'] = Blog.objects.exclude(content_short="")[:3]
-    
+    c['instagallery'] = Instagallery.objects.all().order_by('-media_id')[:5]
     return render_to_response('home.html', c, context_instance=RequestContext(request))
 
 def about(request):
@@ -67,7 +67,6 @@ def about(request):
 
 def get_place(request, place_id):
     return render_to_response('place_on_map.html', {'place': Place.objects.get(id=int(place_id))})
-    
 
 def atlas(request):
     c = get_common_context(request)
