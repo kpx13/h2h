@@ -22,12 +22,15 @@
     <script type="text/javascript" src="/static/js/script.js"></script>
     <script type="text/javascript">
     $(document).ready(function() {
-        $('.slideshow').cycle({
-            fx: 'fade'
-        });
-        var s = slidr.create('slidr-div', {transition: 'fade', controls: 'none', overflow: 'true'});
-        add_slides(s);
-        s.auto(5000);
+        if ($('#slidr-div').length)
+            {
+            $('.slideshow').cycle({
+                fx: 'fade'
+            });
+            var s = slidr.create('slidr-div', {transition: 'fade', controls: 'none', overflow: 'true'});
+            add_slides(s);
+            s.auto(5000);
+        }
     });
     </script>
     {% block head %}
