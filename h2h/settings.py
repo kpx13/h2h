@@ -4,6 +4,7 @@ from os.path import abspath, join, dirname
 
 DEBUG = True
 TEMPLATE_DEBUG = False
+THUMBNAIL_DEBUG = False
 
 ADMINS = (
 )
@@ -92,7 +93,7 @@ INSTALLED_APPS = (
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
-    'admin_tools.dashboard',    
+    'admin_tools.dashboard',
     'django.contrib.auth',
     'django.contrib.sites',
     'django.contrib.admin',
@@ -107,7 +108,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'sorl.thumbnail',
     'livesettings',
-    
+    'embed_video',
     
     'feedback',
     'order',
@@ -181,3 +182,5 @@ try:
     from dev import *
 except:
     pass
+
+#ADMIN_MEDIA_PREFIX = '/static/admin/'

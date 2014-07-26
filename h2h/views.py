@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 from django.core.context_processors import csrf
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template import RequestContext
- 
 
 from pages.models import Page
 from ideas.models import Article as Idea
@@ -147,7 +147,7 @@ def order(request):
     c['countries'] = Country.objects.all()
     if request.method == 'POST':
         form = OrderForm(request.POST)
-        if form.is_valid():            
+        if form.is_valid():
             form.save()
             c['order_ok'] = True
             form = OrderForm()
@@ -169,6 +169,9 @@ def get_event_type_by_id(type):
         return 0
 
 def wedding(request, type):
+    items_on_page = 9
+    template_name = 'wedding.html'
+    sort_column = 'title'
     c = get_common_context(request)
     c['event_type'] = get_event_type(type)
     if not c['event_type']:
@@ -179,9 +182,14 @@ def wedding(request, type):
         items = Country.objects.filter(wt_2=True)
     if type == 'wedding':
         items = Country.objects.filter(wt_3=True)
-    items = items.order_by('title')
-        
-    paginator = Paginator(items, 9)
+    if type == 'service':
+        items = Country.objects.filter(wt_4=True)
+        items_on_page = 18
+        template_name = 'services.html'
+        sort_column = 'id'
+
+    items = items.order_by(sort_column)
+    paginator = Paginator(items, items_on_page)
     page = int(request.GET.get('page', '1'))
     try:
         items = paginator.page(page)
@@ -196,7 +204,7 @@ def wedding(request, type):
     if len(c['page_range']) > 1:
         c['need_pagination'] = True
     c['countries'] = items
-    return render_to_response('wedding.html', c, context_instance=RequestContext(request))
+    return render_to_response(template_name, c, context_instance=RequestContext(request))
 
 def wedding_country(request, type, country):
     c = get_common_context(request)
@@ -235,8 +243,19 @@ def gallery(request):
     if request.GET.get('country', ''):
         albums = albums.filter(country=request.GET['country'])
         c['country'] = int(request.GET['country'])
-    c['albums'] = albums 
+    c['albums'] = albums
     return render_to_response('gallery.html', c, context_instance=RequestContext(request))
+
+def gallery_detail(request, album):
+    c = get_common_context(request)
+    try:
+        album = Category.objects.get(id=album)
+        c['album'] = album
+    # we have no such gallery
+    except ObjectDoesNotExist:
+        raise Http404
+    return render_to_response('gallery_detail.html', c, context_instance=RequestContext(request))
+
 
 def reviews(request):
     c = get_common_context(request)

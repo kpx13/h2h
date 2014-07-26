@@ -4,15 +4,26 @@
 {% block title %}Галерея{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="/static/css/colorbox.css" />
-    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <link rel="stylesheet" href="/static/css/jquery-tilesgallery.css" />
+    <script src="/static/js/jquery.tiles-gallery.js"></script>
     <script type="text/javascript">
-        $(document).ready(function () {
-    
-            $(".gallery").each(function(index, v){
-                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
-            });
+    var tileset_selectors = [{% for a in albums %}"{{ a.id }}",{% endfor %}""];
+
+    $(document).ready(function () {
+        for (each in tileset_selectors) {
+            tileIt("#tile-gallery-"+tileset_selectors[each]);
+        };
+    });
+
+    function tileIt(selector) {
+        $(selector).tilesGallery({
+            tileMinHeight: 50,
+            margin: 0,
+            verticalAlign: 'middle',
+            horizontalAlign: 'center',
+            fadeInDuration: 700
         });
+    };
     </script>
 {% endblock %}
 
@@ -51,17 +62,22 @@
             <section>
                 <div class="gallery">
                     <h3>{{ a.title }}</h3>
+                    <p>({{ a.country }})</p>
+                    <div id="tile-gallery-{{ a.id }}" class="gallery-item">
                     {% for p in a.photos.all %}
-                        {% thumbnail p.image "x150" as im %}
-                            <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                        {% if forloop.counter < 7 %}
+                        {% thumbnail p.image "x200" as im %}
+                            <a class="gallery__item" href="/gallery/{{ a.id }}/" title="">
                                 <img src="{{ im.url }}" />
                             </a>
                         {% endthumbnail %}
+                        {% endif %}
                     {% endfor %}
+                    </div>
                 </div>
             </section>
         {% endfor %}
-        
+
     </div>
-    
+
 {% endblock %}

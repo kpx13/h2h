@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ event_type.2 }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/wedding/official/">Ваша свадьба</a></li>
+    <li class="_active"><a href="/wedding/{{ event_type.1 }}/">{{ event_type.2 }}</a></li>
+{% endblock %}
+
+{% block content %}
+    <h5>{{ event_type.2 }}</h5><br />
+
+    {{ event_type.3|safe }}
+
+    <div class="countries">
+        {% for c in countries %}
+            <div class="service">
+                <a href='/wedding/{{ event_type.1 }}/{{ c.slug }}/'>
+                    <img src="/media/{{ c.image }}" alt="{{ c.title }}"/>
+                    <div class="service__title">{{ c.title }}</div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if need_pagination %}
+        <div class="page-nav">
+            {% for p in page_range %}
+                <a {% if p == countries.number %} class='active' {% endif %} href="{{ get_request }}?page={{ p }}">{{ p }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endblock %}

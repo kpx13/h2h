@@ -5,17 +5,19 @@
 {% block breadcrumbs %}
     <li><a href="/wedding/official/">Ваша свадьба</a></li>
     <li><a href="/wedding/{{ event_type.1 }}/">{{ event_type.2 }}</a></li>
-    <li class="_active">{{ country.title }}</li>
+    <li class="_active"><a href="#">{{ country.title }}</a></li>
 {% endblock %}
 
 {% block content %}
     <div class="country_desc">
         <h5>{{ country.title }}</h5>
-
+        {% if country.map != '' %}
         <div class="counrty-map"><img src="/media/{{ country.map }}"/>
         </div>
+        {% endif %}
         {{ country.text|safe }}
     </div>
+   {% if places.count > 0 %}
     <div class="wedding-places">
         {% for p in places %}
             <div class="preview">
@@ -25,4 +27,5 @@
             </div>
         {% endfor %}
     </div>
+    {% endif %}
 {% endblock %}
