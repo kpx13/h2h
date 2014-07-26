@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+{% load embed_video_tags %}
+
+{% block title %}Галерея{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/colorbox.css" />
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".gallery").each(function(index, v){
+                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block breadcrumbs %}
+    <li><a href="/gallery/">Галерея</a></li>
+    <li class="_active"><a href='#'>{{ album.title }}</a></li>
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="page-gallery">
+
+        <h5>{{ album.title }}</h5>
+        <h3>({{ album.country }}, {{ album.year }})</h3>
+        {{ album.text|safe }}
+
+        <section>
+            <div class="gallery">
+                {% for p in album.photos.all %}
+                    <div class="gallery-item-pad">
+                    {% if p.image != '' %}
+                        {% thumbnail p.image "x480" as im %}
+                            <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                                <img src="{{ im.url }}" />
+                            </a>
+                        {% endthumbnail %}
+                    {% endif %}
+                    {% if p.video != '' %}
+                        {% video p.video %}
+                    {% endif %}
+                    {% if p.text != '' and p.text != None %}
+                        {{ p.text|safe }}
+                    {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+    </div>
+
+    <p><a href="/gallery/">Назад</a></p>
+
+{% endblock %}
