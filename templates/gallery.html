@@ -57,26 +57,21 @@
                 $('#filter').submit();
             });
         </script>
+
         <h5>Галерея</h5>
-        {% for a in albums %}
-            <section>
-                <div class="gallery">
-                    <h3>{{ a.title }}</h3>
-                    <p>({{ a.country }})</p>
-                    <div id="tile-gallery-{{ a.id }}" class="gallery-item">
-                    {% for p in a.photos.all %}
-                        {% if forloop.counter < 7 %}
-                        {% thumbnail p.image "x200" as im %}
-                            <a class="gallery__item" href="/gallery/{{ a.id }}/" title="">
-                                <img src="{{ im.url }}" />
-                            </a>
-                        {% endthumbnail %}
-                        {% endif %}
-                    {% endfor %}
-                    </div>
+        <br>
+        <br>
+
+            <div class="gallery">
+            {% for a in albums %}
+                <div class="album">
+                    <a href="/gallery/{{ a.id }}/" title="">
+                        <img src="/media/{{ a.preview_image }}" />
+                        <div class="album__title">{{ a.title }}, {{ a.country }}</div>
+                    </a>
                 </div>
-            </section>
-        {% endfor %}
+            {% endfor %}
+            </div>
 
     </div>
 

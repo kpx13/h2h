@@ -9,6 +9,7 @@ class Category(models.Model):
     title = models.CharField(max_length=128, verbose_name=u'название')
     year = models.IntegerField(verbose_name=u'год')
     country = models.ForeignKey(Country, verbose_name=u'страна')
+    preview_image = models.ImageField(upload_to= 'uploads/gallery', max_length=256, verbose_name=u'превью')
     text = RichTextField(verbose_name=u'описание галереи')
 
     class Meta:

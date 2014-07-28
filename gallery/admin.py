@@ -6,7 +6,7 @@ class PhotoInline(admin.TabularInline):
     list_display = ('image', )
     model = Photo
     extra = 10
-    
+
 class CategoryAdmin(admin.ModelAdmin):
     inlines = [ PhotoInline, ]
     list_display = ('title', 'year')
