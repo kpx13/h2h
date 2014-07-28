@@ -6,6 +6,8 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
+ALLOWED_HOSTS = ['.h2h-wedding.com', 'localhost']
+
 ADMINS = (
 )
 
