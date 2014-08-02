@@ -53,5 +53,35 @@
         {% endfor %}
     </div>
 
-{% endblock %}
+    {% if country.wt_4 %}
+    <div class="we-organize">
+        <h3>Свадьбы, организованные Heart 2 Heart:</h3>
+        <div>
+            <a href="/gallery/{{ we_create_left.id }}/">
+                {% thumbnail we_create_left.preview_image "x150" as im %}
+                    <img src="{{ im.url }}">
+                {% endthumbnail %}
+                <p>{{ we_create_left.title }}</p>
+            </a>
+        </div>
+        <div>
+            <a href="/gallery/{{ we_create_center.id }}/">
+                {% thumbnail we_create_center.preview_image "x150" as im %}
+                    <img src="{{ im.url }}">
+                {% endthumbnail %}
+                <p>{{ we_create_center.title }}</p>
+            </a>
+        </div>
+        <div>
+            <a href="/gallery/{{ we_create_right.id }}/">
+                {% thumbnail we_create_right.preview_image "x150" as im %}
+                    <img src="{{ im.url }}">
+                {% endthumbnail %}
+                <p>{{ we_create_right.title }}</p>
+           </a>
+        </div>
+        <span style="width:100%;display:inline-block;height:0px"></span>
+    </div>
+    {% endif %}
 
+{% endblock %}

@@ -212,7 +212,10 @@ def wedding_country(request, type, country):
     c['event_type'] = get_event_type(type)
     if not c['event_type']:
         c['event_type'] = get_event_type('official')
-    c['places'] = Place.objects.filter(event_type=c['event_type'][0], country=c['country'])  
+    c['places'] = Place.objects.filter(event_type=c['event_type'][0], country=c['country'])
+    c['we_create_left'] = Category.objects.get(id=6)
+    c['we_create_center'] = Category.objects.get(id=9)
+    c['we_create_right'] = Category.objects.get(id=3)
     return render_to_response('wedding_country.html', c, context_instance=RequestContext(request))
 
 def wedding_place(request, type, country, place):
