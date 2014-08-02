@@ -76,8 +76,8 @@ class Place(models.Model):
     country = models.ForeignKey(Country, verbose_name=u'страна', related_name='places')
     name = models.CharField(max_length=200, verbose_name=u'название')
     text = RichTextField(verbose_name=u'описание')
-    price = models.CharField(max_length=200, verbose_name=u'строчка с ценой')
-    service = models.TextField(verbose_name=u'описание доп. услуг')
+    price = models.CharField(max_length=200, blank=True, null=True, verbose_name=u'строчка с ценой')
+    service = models.TextField(blank=True, null=True, verbose_name=u'описание доп. услуг')
     image = models.ImageField(upload_to= 'uploads/wedding/place', max_length=256, verbose_name=u'фото')
     file_price = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'прайс-лист')
     file_service = models.FileField(upload_to= 'uploads/wedding/place_docs', blank=True, max_length=256, verbose_name=u'дополнительные услуги')
@@ -104,29 +104,41 @@ class Place(models.Model):
             return Place.objects.get(slug=page_name)
         except:
             return None
-        
+
     @property
     def coords(self):
         return str(self.coords_x).replace(',', '.') + ', ' +str(self.coords_y).replace(',', '.')
-    
+
     @property
     def map_content(self):
         return "<b>%s</b><br />%s<br />" % (self.name, self.country.title)
-    
+
     class Meta:
         verbose_name = u'место'
         verbose_name_plural = u'места'
-    
+
     def __unicode__(self):
         return self.name
-    
+
 class PlacePhoto(models.Model):
     place = models.ForeignKey(Place, verbose_name=u'категория', related_name='photos')
     image = models.ImageField(upload_to= 'uploads/wedding/place_gallery', max_length=256, verbose_name=u'картинка')
-    
+
     class Meta:
         verbose_name = u'фотография места'
         verbose_name_plural = u'фотографии мест'
-    
+
     def __unicode__(self):
         return str(self.id)
+
+class CountryPhoto(models.Model):
+    country = models.ForeignKey(Country, verbose_name=u'категория', related_name='photos')
+    image = models.ImageField(upload_to='uploads/wedding/place_gallery', max_length=256, verbose_name=u'картинка')
+
+    class Meta:
+        verbose_name = u'фотография услуги'
+        verbose_name_plural = u'фотографии услуг'
+
+    def __unicode__(self):
+        return str(self.id)
+

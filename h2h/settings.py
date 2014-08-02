@@ -2,7 +2,7 @@
 import os
 from os.path import abspath, join, dirname
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = False
 THUMBNAIL_DEBUG = False
 
@@ -178,7 +178,7 @@ EMAIL_HOST_PASSWORD = 'noreply13'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
-EMAIL_SEND_TO = 'anna@webgenesis.ru'
+EMAIL_SEND_TO = 'hello@h2h-wedding.com'
 
 try:
     from dev import *

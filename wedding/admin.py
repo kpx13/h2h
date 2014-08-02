@@ -1,18 +1,24 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from models import Country, Place, PlacePhoto, PlaceEventType, PlaceSeason, PlaceType
+from models import Country, CountryPhoto, Place, PlacePhoto, PlaceEventType, PlaceSeason, PlaceType
 
-class PhotoInline(admin.TabularInline): 
+class PlacePhotoInline(admin.TabularInline):
     list_display = ('image', )
     model = PlacePhoto
     extra = 10
-    
+
+class CountryPhotoInline(admin.TabularInline):
+    list_display = ('image', )
+    model = CountryPhoto
+    extra = 10
+
 class PlaceAdmin(admin.ModelAdmin):
-    inlines = [ PhotoInline, ]
+    inlines = [ CountryPhotoInline, ]
     list_display = ('name', 'country')
-    
+
 class CountryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'wt_1', 'wt_2', 'wt_3')
+    inlines = [ CountryPhotoInline, ]
+    list_display = ('title', 'wt_1', 'wt_2', 'wt_3', 'wt_4')
 
 admin.site.register(Country, CountryAdmin)
 admin.site.register(Place, PlaceAdmin)

@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 
+{% load thumbnail %}
+
 {% block title %}Официальная церемония | {{ country.title }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="/static/css/colorbox.css" />
+    <script src="/static/js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".gallery").each(function(index, v){
+                $(this).find('.gallery__item').colorbox({rel: 'gallery'+index });
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block breadcrumbs %}
     <li><a href="/wedding/official/">Ваша свадьба</a></li>
@@ -28,4 +42,16 @@
         {% endfor %}
     </div>
     {% endif %}
+
+    <div class="wedding-place__gallery gallery">
+        {% for p in country.photos.all %}
+            {% thumbnail p.image "x150" as im %}
+                <a class="gallery__item" href="/media/{{ p.image }}" title="">
+                    <img src="{{ im.url }}" />
+                </a>
+            {% endthumbnail %}
+        {% endfor %}
+    </div>
+
 {% endblock %}
+

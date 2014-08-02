@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import os, sys, urllib, mechanize
+import os, sys, urllib
 from instagram import client, subscriptions
 
 sys.path.append(os.path.dirname(__file__) + "../")

@@ -14,11 +14,10 @@ def sendmail(subject, body):
         [config_value('MyApp', 'EMAIL')])
 
 class FeedbackForm(ModelForm):
-    
+
     class Meta:
         model = Feedback
         exclude = ('request_date', )
-    
 
     def save(self, *args, **kwargs):
         super(FeedbackForm, self).save(*args, **kwargs)

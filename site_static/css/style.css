@@ -710,18 +710,21 @@ div.gallery {
     min-height: 200px;
 }
 
-.country_desc .counrty-map, .place_desc .place-map {
+.country_desc .counrty-map img, .place_desc .place-map img {
+    display: block;
     float: right;
 }
 
 .country_desc p {
-    padding-right: 275px;
     padding-top: 10px;
+}
+
+.counrty-map img {
+    margin-left: 10px;
 }
 
 .place_desc p {
     padding-right: 330px;
-
 }
 
 h5 {
