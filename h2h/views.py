@@ -145,7 +145,8 @@ def contacts(request):
 def order(request):
     c = get_common_context(request)
     form = OrderForm()
-    c['countries'] = Country.objects.all()
+    # filter real countries
+    c['countries'] = Country.objects.filter(wt_4=False)
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -282,7 +283,6 @@ def reviews(request):
     c['reviews'] = items
     # get places list to populate place choices
     c['places'] = Place.objects.all()
-
     if request.method == 'POST':
         form = ReviewForm(request.POST, request.FILES)
         if form.is_valid():
@@ -290,34 +290,7 @@ def reviews(request):
             c['review_ok'] = True
     form = ReviewForm()
     c.update({'form': form})
-
     return render_to_response('reviews.html', c, context_instance=RequestContext(request))
-
-#    c = get_common_context(request)
-#    items = Review.objects.filter(approved=True)
-#    c['places'] = Place.objects.all()
-#    if request.method == 'POST':
-#        Review(name=request.POST.get('name', ''), 
-#               place=Place.objects.get(id=int(request.POST.get('place', '1'))),
-#               photo=request.FILES.get('photo', ''),
-#               text=request.POST.get('text', '')).save()
-#        c['review_ok'] = True
-#    paginator = Paginator(items, PAGINATION_COUNT)
-#    page = int(request.GET.get('page', '1'))
-#    try:
-#        items = paginator.page(page)
-#    except PageNotAnInteger:
-#        page = 1
-#        items = paginator.page(page)
-#    except EmptyPage:
-#        page = paginator.num_pages
-#        items = paginator.page(page)
-#    c['page'] = page
-#    c['page_range'] = paginator.page_range
-#    if len(c['page_range']) > 1:
-#        c['need_pagination'] = True
-#    c['reviews'] = items
-#    return render_to_response('reviews.html', c, context_instance=RequestContext(request))
 
 def blog(request, category):
     c = get_common_context(request)
