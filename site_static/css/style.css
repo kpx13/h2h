@@ -272,7 +272,10 @@ section.ceremony div .preview div {
     width: 227px;
     background: url(../images/ceremony_anons_bg.png);
     -moz-border-radius: 0px 0px 5px 5px; /* Firefox */
-    -webkit-border-radius: 0px 0px 5px 5px; /* Safari, Chrome */
+    -webkit-border-top-left-radius: 5px; /* Safari, Chrome */
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 0px;
     -khtml-border-radius: 0px 0px 5px 5px; /* KHTML */
     border-radius: 0px 0px 5px 5px; /* CSS3 */
     margin: 0px;
@@ -552,7 +555,9 @@ h4 span>a, h4 span>a:hover, h4 span>a:visited   {
     overflow: hidden;
     border-radius: 40px 0 40px 0;
     -webkit-border-top-left-radius: 40px;
+    -webkit-border-top-right-radius: 0px;
     -webkit-border-bottom-right-radius: 40px;
+    -webkit-border-bottom-left-radius: 0px;
     -moz-border-radius-topleft: 40px;
     -moz-border-radius-bottomright: 40px;
     border-top-left-radius: 40px;
@@ -587,12 +592,12 @@ h4 span>a, h4 span>a:hover, h4 span>a:visited   {
     position: relative;
     overflow: hidden;
     border-radius: 40px 0 40px 0;
-    -webkit-border-top-left-radius: 30px;
-    -webkit-border-bottom-right-radius: 30px;
-    -moz-border-radius-topleft: 30px;
-    -moz-border-radius-bottomright: 30px;
-    border-top-left-radius: 30px;
-    border-bottom-right-radius: 30px;
+    -webkit-border-top-left-radius: 40px;
+    -webkit-border-bottom-right-radius: 40px;
+    -moz-border-radius-topleft: 40px;
+    -moz-border-radius-bottomright: 40px;
+    border-top-left-radius: 40px;
+    border-bottom-right-radius: 40px;
     margin-bottom: 30px;
     text-align: left;
     cursor: pointer;
@@ -949,7 +954,10 @@ a.preview__title:hover {
     width: 948px;
     height: 180px;
     -moz-border-radius: 26px 0px 26px 0px;
-    -webkit-border-radius: 26px 0px 26px 0px;
+    -webkit-border-top-left-radius: 26px; /* Safari, Chrome */
+    -webkit-border-top-right-radius: 0px;
+    -webkit-border-bottom-right-radius: 26px;
+    -webkit-border-bottom-left-radius: 0px;
     -khtml-border-radius: 26px 0px 26px 0px;
     border-radius: 26px 0px 26px 0px;
     margin-right: auto;

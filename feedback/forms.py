@@ -1,4 +1,5 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
+
 from django import forms
 from django.forms import ModelForm
 from django.conf import settings
@@ -6,7 +7,6 @@ from django.core.mail import send_mail
 from django.template import Context, Template
 from models import Feedback
 from livesettings import config_value
-
 
 def sendmail(subject, body):
     mail_subject = ''.join(subject)

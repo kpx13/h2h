@@ -2,6 +2,9 @@
 
 from django.conf.urls.defaults import patterns, include, url
 from django.contrib import admin
+
+import autocomplete_light
+autocomplete_light.autodiscover()
 admin.autodiscover()
 
 import settings
@@ -18,6 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/jsi18n/', 'django.views.i18n.javascript_catalog'),
     url(r'^settings/', include('livesettings.urls')),
     url(r'^ckeditor/', include('ckeditor.urls')),
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
 
     url(r'^$', views.home),
     #url(r'^about/$', views.about),

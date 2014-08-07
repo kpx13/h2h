@@ -3,6 +3,11 @@
 
 {% block title %}Отзывы{% endblock %}
 
+{% block head %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.js" type="text/javascript"></script>
+    {% include 'autocomplete_light/static.html' %}
+{% endblock %}
+
 {% block breadcrumbs %}
     <li class="_active"><a href="#">Отзывы</a></li>
 {% endblock %}
@@ -14,15 +19,17 @@
             {% if review_ok %}
                 <h5>Спасибо за Ваш отзыв! В ближайшее время он появится на сайте!</h5>
             {% endif %}
-            
+
             {% for r in reviews %}
                 <div class="review" style='overflow: hidden; '>
                     {% if r.photo %}
-                        <img src="/media/{{ r.photo }}" alt="" style='max-width: 300px; max-height: 250px;'/>
+                        {% thumbnail r.photo "x250" as im %}
+                        <img src="{{ im.url }}" alt="" style='max-width: 300px; max-height: 250px;'/>
+                        {% endthumbnail %}
                     {% else %}
-                        <img src="/media/{{ r.place.image }}" alt="" style='max-width: 300px'/>
+                        <img src="/static/images/white-wedding.jpg" alt="" style='max-width: 300px'/>
                     {% endif %}
-                    <div class="preview__title"><span class="review-name">{{ r.name }}</span><a href="/wedding/type/{{ r.place.country.slug }}/{{ r.place.slug }}">{{ r.place.name }}</a></div>
+                    <div class="preview__title"><span class="review-name">{{ r.name }}</span>({{ r.place }})</div>
                     <p>{{ r.text }}</p>
                 </div>
             {% endfor %}
@@ -36,30 +43,34 @@
             {% endif %}
             <div style='clear: both'></div>
          </div>
-         
 
         <div class="review__popup">
             <form method='POST' enctype="multipart/form-data">
+
+{% comment 'old form' %}
                 <label for="review__name">Имена пары: <input id="review__name" name="name" type="text" placeholder="например: Аня и Андрей"/></label>
-                
                 <div class="select">
                     <select size="1" name="place">
                         <option value="1" selected>Название места проведения торжества</option>
                         {% for p in places %}
                             <option value="{{ p.id }}">{{ p.name }}</option>
                         {% endfor %}
-
                     </select>
                 </div>
                 <textarea name="text" placeholder="Текст отзыва"></textarea>
                 <label for="review__photo">Фотография: <input id="review__photo" name="photo" type="file" placeholder=""/></label>
                 <button type='submit' class='review__btn__send'>Оставить отзыв</button>
                 <span class="review__close">закрыть</span>
+{% endcomment %}
+
+                {% for field in form %}
+                {{ field.label_tag }}<br>{{ field }}<br>
+                {% endfor %}
+                <button type='submit' class='review__btn__send'>Оставить отзыв</button>
+                <span class="review__close">закрыть</span>
                 {% csrf_token %}
             </form>
         </div>
-        
-        
-        
+
     </div>
 {% endblock %}

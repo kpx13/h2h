@@ -7,7 +7,7 @@ class Feedback(models.Model):
     phone  = models.CharField(u'Телефон или почта', max_length=255)
     msg = models.TextField(u'Сообщение')
     request_date = models.DateTimeField(u'дата заявки', auto_now_add=True)
-                    
+
     class Meta:
         verbose_name = u'сообщение'
         verbose_name_plural = u'сообщения через обратную связь'
