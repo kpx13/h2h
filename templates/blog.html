@@ -47,7 +47,7 @@
                 <img src="/media/{{ b.image }}">
                 {{ b.content|safe }}
                 
-                <div class="wedding-place__gallery gallery" style='width: 720px'>
+                <div class="wedding-place__gallery gallery">
                     {% for p in b.photos.all %}
                         {% thumbnail p.image "x150" as im %}
                             <a class="gallery__item" href="/media/{{ p.image }}" title="">
