@@ -73,7 +73,9 @@
                 <div class="album">
                     <a href="/gallery/{{ a.id }}/" title="">
                         <img src="/media/{{ a.preview_image }}" />
-                        <div class="album__title">{{ a.title }}, {{ a.country }}</div>
+                        <div class="album__title">
+                            {{ a.title }}{% if a.country %}, {{ a.country }}{% endif %}
+                        </div>
                     </a>
                 </div>
             {% endfor %}

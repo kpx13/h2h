@@ -8,7 +8,7 @@ from ckeditor.fields import RichTextField
 class Category(models.Model):
     title = models.CharField(max_length=128, verbose_name=u'название')
     year = models.IntegerField(verbose_name=u'год')
-    country = models.ForeignKey(Country, verbose_name=u'страна')
+    country = models.ForeignKey(Country, verbose_name=u'страна', null=True, blank=True)
     preview_image = models.ImageField(blank=True, null=True, upload_to='uploads/gallery', max_length=256, verbose_name=u'превью')
     text = RichTextField(blank=True, null=True, verbose_name=u'описание галереи')
 

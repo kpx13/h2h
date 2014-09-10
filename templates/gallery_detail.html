@@ -27,7 +27,9 @@
     <div class="page-gallery">
 
         <h5>{{ album.title }}</h5>
-        <h3>({{ album.country }})</h3>
+            {% if album.country %}
+                <h3>({{ album.country }})</h3>
+            {% endif %}
         {{ album.text|safe }}
 
         <section>

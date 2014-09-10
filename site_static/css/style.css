@@ -1015,7 +1015,8 @@ a.preview__title:hover {
 }
 
 .gallery-item-pad p {
-    padding: 12px 24px 12px 24px;
+    padding: 6px 24px 6px 24px;
+    margin: 0;
 }
 
 .wedding-place__gallery {
