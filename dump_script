@@ -1,1 +1,0 @@
-python manage.py dumpdata banner blog feedback gallery ideas news order pages review slideshow team wedding > dump_all____.json

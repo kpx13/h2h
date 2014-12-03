@@ -1,4 +1,5 @@
-django==1.4.2
+mysql-python
+django==1.4.15
 Pillow
 django-ckeditor==4.0.2
 sorl-thumbnail
@@ -7,3 +8,4 @@ django-admin-tools
 pytils
 django-livesettings
 django-embed-video
+django-autocomplete-light

@@ -16,5 +16,5 @@ config_register(StringValue(
         'EMAIL', 
         description = u'Email администратора',
         help_text = u"Почта, куда будут приходить заявки.",
-        default = 'annkpx@gmail.com'
+        default = 'tanner.of.kha@gmail.com'
     ))

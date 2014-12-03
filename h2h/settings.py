@@ -187,3 +187,5 @@ except:
     pass
 
 #ADMIN_MEDIA_PREFIX = '/static/admin/'
+
+FILE_UPLOAD_PERMISSIONS = 0o0664
